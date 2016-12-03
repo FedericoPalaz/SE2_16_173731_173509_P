@@ -18,31 +18,32 @@
     <!--navbar-->
      <nav class="nav-extended">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo"><i><b>ASPS</b></i></a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><button class="waves-effect waves-light btn">Logout</button></a>
+          <a href="#" class="brand-logo "><i><b>ASPS</b></i></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="left material-icons">perm_identity</i>Mario Rossi</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a class="waves-effect waves-light btn">Logout</a></li>
-          </ul>
-
+            <li><a><i class="left material-icons">perm_identity</i>Mario Rossi</a></li>
+          </ul> 
+          <ul class="side-nav" id="mobile-demo">
+                <li><a></a></li>
+            </ul>
           <ul class="tabs tabs-transparent">
-            <li class="tab"><a href="#lunedi">Lunedì</a></li>
-            <li class="tab"><a href="#martedi">Martedì</a></li>
-            <li class="tab "><a href="#mercoledi">Mercoledì</a></li>
-            <li class="tab"><a href="#giovedi">Giovedì</a></li>
-            <li class="tab"><a href="#venerdi">Venerdì</a></li>
-            <li class="tab"><a href="#sabato">Sabato</a></li>
-            <li class="tab"><a href="#domenica">Domenica</a></li>
+              <a id="txt_lunedi" style="visibility:visible">LUNEDI</a>
+              <a id="txt_martedi" >MARTEDI</a>
+              <a id="txt_mercoledi" style="visibility:hidden">MERCOLEDI</a>
+              <a id="txt_giovedi" id="txt_lunedi"style="visibility:hidden">GIOVEDI</a>
+              <a id="txt_venerdi"style="visibility:hidden">VENERDI</a>
+              <a id="txt_sabato"style="visibility:hidden">SABATO</a>
+              <a id="txt_domenica" style="visibility:hidden">DOMENICA</a>
           </ul>
         </div>
       </nav>
     
      <!--tab1-->
-      <div id="lunedi" class="col s12">
+      <div id="lunedi" class="col s12" >
           <h5 class="center-align"><b>Pasti del Lunedì</b></h5>  
-          <form>
+          
               <div class="card-panel">
-                <h1>Ciao</h1>
-              </div>
+                </div>
               <div class="card-panel">
                 </div>
               <div class="card-panel">
@@ -50,12 +51,12 @@
               <div class="card-panel">
                 </div>
               <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                <button class="waves-effect waves-light btn"   onclick="apri('lunedi','martedi')">Successivo</button>
               </div>
-          </form>
+          
         </div>
      <!--tab2-->
-      <div id="martedi" class="col s12">
+      <div id="martedi" class="col s12" style="display:none;">
         <h5 class="center-align"><b>Pasti del Martedì</b></h5>  
           <form>
               <div class="card-panel">
@@ -67,12 +68,12 @@
               <div class="card-panel">
                 </div>
               <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                <a class="waves-effect waves-light btn" onclick="apri('martedi','mercoledi')">Successivo</a>
               </div>
           </form>
         </div>
     <!--tab3-->
-      <div id="mercoledi" class="col s12">
+      <div id="mercoledi" class="col s12" style="display:none;">
           <h5 class="center-align"><b>Pasti del Mercoledì</b></h5>  
           <form>
               <div class="card-panel">
@@ -84,12 +85,12 @@
               <div class="card-panel">
                 </div>
               <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                <a class="waves-effect waves-light btn" onclick="apri('mercoledi','giovedi')">Successivo</a>
               </div>
           </form>
         </div>
     <!--tab4-->
-      <div id="giovedi" class="col s12">
+      <div id="giovedi" class="col s12" style="display:none;">
           <h5 class="center-align"><b>Pasti del Giovedì</b></h5>  
           <form>
               <div class="card-panel">
@@ -101,12 +102,12 @@
               <div class="card-panel">
                 </div>
               <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                <a class="waves-effect waves-light btn" onclick="apri('giovedi','venerdi')">Successivo</a>
               </div>
           </form>
         </div>
     <!--tab5-->
-      <div id="venerdi" class="col s12">
+      <div id="venerdi" class="col s12" style="display:none;">
           <h5 class="center-align"><b>Pasti del Venerdì</b></h5>  
           <form>
               <div class="card-panel">
@@ -118,12 +119,12 @@
               <div class="card-panel">
                 </div>
               <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                <a class="waves-effect waves-light btn" onclick="apri('venerdi','sabato')">Successivo</a>
               </div>
           </form>
         </div>
     <!--tab6-->
-      <div id="sabato" class="col s12">
+      <div id="sabato" class="col s12" style="display:none;">
           <h5 class="center-align"><b>Pasti del Sabato</b></h5>  
           <form>
               <div class="card-panel">
@@ -135,12 +136,12 @@
               <div class="card-panel">
                 </div>
               <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                <a class="waves-effect waves-light btn"  onclick="apri('sabato','domenica')">Successivo</a>
               </div>
           </form>
         </div>
     <!--tab7-->
-      <div id="domenica" class="col s12">
+      <div id="domenica" class="col s12" style="display:none;">
           <h5 class="center-align"><b>Pasti della Domenica</b></h5>  
           <form>
               <div class="card-panel">
@@ -160,5 +161,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
+    <!--Import script-->
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 </html>

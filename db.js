@@ -50,7 +50,7 @@ menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
 
 //questa funzione crea le tabelle
-function createTable() {
+function initTables() {
     Conn.sync({force:true}).then(function() {
         insert_rows();
     });
@@ -255,6 +255,7 @@ function insert_rows() {
     
 }
 
+/*
 function initDb() {
     // force: true will drop the table if it already exists
     user.sync({force: true}).then(function () {
@@ -279,7 +280,8 @@ function initDb() {
     ).then(function (user_res) {
         return user_res.first_name;
     });*/
+/*
 }
 
-exports.initDb=initDb;
-exports.createTable=createTable;
+exports.initDb=initDb;*/
+exports.initTables=initTables;

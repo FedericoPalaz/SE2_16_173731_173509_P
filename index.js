@@ -55,8 +55,9 @@ const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
 var Conn = new Sequelize(connectionString);
 
 app.use('/db/init',function(req,res){
-    db.createTable();
+    db.initTables();
     res.send('Fatto, Controlla nel db se ho creato tabella user e inserito Jhon ');
+
 });
 
 //listening on port
