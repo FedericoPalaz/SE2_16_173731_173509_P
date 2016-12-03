@@ -5,6 +5,13 @@ var path =require('path');   //path
 //init express
 var app=express();
 
+//pg
+const pg = require('pg');
+const connectionString = process.env.DATABASE_URL;
+
+const client = new pg.Client(connectionString);
+
+
 //parser for url and json
 app.use(bodyParser.urlencoded({ extended: false }));    //parser for url
 app.use(bodyParser.json()); //parser for json
@@ -18,7 +25,11 @@ app.set('port', (process.env.PORT || 5000));
 
 
 app.get('/',function(req,res){
-    res.render('prova',{title: 'Funziona'});
+    client.connect();
+    var query = client.query('SELECT * FROM prova');
+    query.on('row', function(row) {
+      res.render('prova',{title: row.cognome});
+    });
 });
 
 app.use('/ciao',function(req,res){
