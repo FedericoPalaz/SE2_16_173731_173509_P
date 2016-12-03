@@ -52,10 +52,10 @@ var Conn = new Sequelize(connectionString);
 
 var User = Conn.define('user', {
   id: {
-    type: Sequelize.integer
+    type: Conn.integer
   },
   cognome: {
-    type: Sequelize.STRING
+    type: Conn.STRING
   }
 });
 
