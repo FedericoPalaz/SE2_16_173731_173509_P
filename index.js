@@ -50,15 +50,28 @@ const connectionString = process.env.DATABASE_URL;
 //const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
 var Conn = new Sequelize(connectionString);
 
+var User = sequelize.define('user', {
+  id: {
+    type: Sequelize.integer
+  },
+  cognome: {
+    type: Sequelize.STRING
+  }
+});
+
 app.use('/db',function(req,res){
-    Conn
-    .authenticate()
+    Conn.authenticate()
     .then(function(err) {
-        res.send('Connection has been established successfully.');
+        prova.findOne().then(function (user) {
+            res.send(user.get('cognome'));
+        //res.send('Connection has been established successfully.');
     })
     .catch(function (err) {
         res.send('Unable to connect to the database:', err);
     });
+    
+
+});
 });
 
 //listening on port
