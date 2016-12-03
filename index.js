@@ -5,6 +5,10 @@ var path =require('path');   //path
 
 //init express
 var app=express();
+
+//import db
+var db= require('./db.js');
+
 /*
 //pg
 const pg = require('pg');
@@ -46,19 +50,13 @@ app.use('/ciao',function(req,res){
 var Sequelize= require('sequelize');
 var pg= require('pg');
 
-const connectionString = process.env.DATABASE_URL;
-//const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
+//const connectionString = process.env.DATABASE_URL;
+const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
 var Conn = new Sequelize(connectionString);
 
-app.use('/db',function(req,res){
-    Conn
-    .authenticate()
-    .then(function(err) {
-        res.send('Connection has been established successfully.');
-    })
-    .catch(function (err) {
-        res.send('Unable to connect to the database:', err);
-    });
+app.use('/db/init',function(req,res){
+    db.createTable();
+    res.send('Fatto, Controlla nel db se ho creato tabella user e inserito Jhon ');
 });
 
 //listening on port
