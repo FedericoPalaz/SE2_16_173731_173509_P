@@ -50,7 +50,7 @@ const connectionString = process.env.DATABASE_URL;
 //const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
 var Conn = new Sequelize(connectionString);
 
-var User = sequelize.define('user', {
+var User = Sequelize.define('user', {
   id: {
     type: Sequelize.integer
   },
