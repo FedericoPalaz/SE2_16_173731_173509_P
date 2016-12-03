@@ -26,138 +26,197 @@
           <ul class="side-nav" id="mobile-demo">
                 <li><a></a></li>
             </ul>
-          <ul class="tabs tabs-transparent">
-              <a id="txt_lunedi" style="visibility:visible">LUNEDI</a>
-              <a id="txt_martedi" >MARTEDI</a>
-              <a id="txt_mercoledi" style="visibility:hidden">MERCOLEDI</a>
-              <a id="txt_giovedi" id="txt_lunedi"style="visibility:hidden">GIOVEDI</a>
-              <a id="txt_venerdi"style="visibility:hidden">VENERDI</a>
-              <a id="txt_sabato"style="visibility:hidden">SABATO</a>
-              <a id="txt_domenica" style="visibility:hidden">DOMENICA</a>
+          <ul class="tabs tabs-transparent" style="overflow:hidden">
+              <div class="center-align">
+                  <a id="txt_lunedi" style="diplay:none">LUNEDI</a>
+                  <a id="txt_martedi" style="diplay:none" >MARTEDI</a>
+                  <a id="txt_mercoledi" style="diplay:none">MERCOLEDI</a>
+                  <a id="txt_giovedi" style="diplay:none">GIOVEDI</a>
+                  <a id="txt_venerdi"style="diplay:none">VENERDI</a>
+                  <a id="txt_sabato"style="diplay:none">SABATO</a>
+                  <a id="txt_domenica" style="diplay:none">DOMENICA</a>
+                </div>
           </ul>
         </div>
       </nav>
-    
-     <!--tab1-->
-      <div id="lunedi" class="col s12" >
-          <h5 class="center-align"><b>Pasti del Lunedì</b></h5>  
-          
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <button class="waves-effect waves-light btn"   onclick="apri('lunedi','martedi')">Successivo</button>
-              </div>
-          
-        </div>
-     <!--tab2-->
-      <div id="martedi" class="col s12" style="display:none;">
-        <h5 class="center-align"><b>Pasti del Martedì</b></h5>  
-          <form>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" onclick="apri('martedi','mercoledi')">Successivo</a>
-              </div>
-          </form>
-        </div>
-    <!--tab3-->
-      <div id="mercoledi" class="col s12" style="display:none;">
-          <h5 class="center-align"><b>Pasti del Mercoledì</b></h5>  
-          <form>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" onclick="apri('mercoledi','giovedi')">Successivo</a>
-              </div>
-          </form>
-        </div>
-    <!--tab4-->
-      <div id="giovedi" class="col s12" style="display:none;">
-          <h5 class="center-align"><b>Pasti del Giovedì</b></h5>  
-          <form>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" onclick="apri('giovedi','venerdi')">Successivo</a>
-              </div>
-          </form>
-        </div>
-    <!--tab5-->
-      <div id="venerdi" class="col s12" style="display:none;">
-          <h5 class="center-align"><b>Pasti del Venerdì</b></h5>  
-          <form>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" onclick="apri('venerdi','sabato')">Successivo</a>
-              </div>
-          </form>
-        </div>
-    <!--tab6-->
-      <div id="sabato" class="col s12" style="display:none;">
-          <h5 class="center-align"><b>Pasti del Sabato</b></h5>  
-          <form>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <a class="waves-effect waves-light btn"  onclick="apri('sabato','domenica')">Successivo</a>
-              </div>
-          </form>
-        </div>
-    <!--tab7-->
-      <div id="domenica" class="col s12" style="display:none;">
-          <h5 class="center-align"><b>Pasti della Domenica</b></h5>  
-          <form>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="card-panel">
-                </div>
-              <div class="input-field center-align">
-                <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
-                </div>
-          </form>
-        </div>
-    
+      <div class="container">
+         <!--tab1-->
+          <div id="lunedi" class="col s12" >
+              <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                       <div class="row">
+                          <div class="col s4 center-align">
+                                <img src="img.png" with="50px" height="50px"/>
+                              </div>
+                          <div class="col s4 center-align">
+                            <p>Pasta asciutta e bagnata </p>
+                          </div>
+                          <div class="col s4 center-align">
+                            <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                          </div>
+                      </div>
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">                
+                    <button class="waves-effect waves-light btn"   onclick="avanti('lunedi','martedi')">Successivo</button>
+                  </div>
+
+            </div>
+         <!--tab2-->
+          <div id="martedi" class="col s12" style="display:none;">
+              <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">
+                      <a class="waves-effect waves-light btn"   onclick="indietro('martedi','lunedi')">Indietro</a>
+                    <a class="waves-effect waves-light btn" onclick="avanti('martedi','mercoledi')">Successivo</a>
+                  </div>
+            </div>
+        <!--tab3-->
+          <div id="mercoledi" class="col s12" style="display:none;">
+              <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">
+                      <a class="waves-effect waves-light btn"   onclick="indietro('mercoledi','martedi')">Indietro</a>
+                    <a class="waves-effect waves-light btn" onclick="avanti('mercoledi','giovedi')">Successivo</a>
+                  </div>
+            </div>
+        <!--tab4-->
+          <div id="giovedi" class="col s12" style="display:none;">
+               <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">
+                      <a class="waves-effect waves-light btn"   onclick="indietro('giovedi','mercoledi')">Indietro</a>
+                    <a class="waves-effect waves-light btn" onclick="avanti('giovedi','venerdi')">Successivo</a>
+                  </div>
+            </div>
+        <!--tab5-->
+          <div id="venerdi" class="col s12" style="display:none;">
+              <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">
+                      <a class="waves-effect waves-light btn"   onclick="indietro('venerdi','giovedi')">Indietro</a>
+                    <a class="waves-effect waves-light btn" onclick="avanti('venerdi','sabato')">Successivo</a>
+                  </div>
+            </div>
+        <!--tab6-->
+          <div id="sabato" class="col s12" style="display:none;">
+              <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">
+                      <a class="waves-effect waves-light btn"   onclick="indietro('sabato','venerdi')">Indietro</a>
+                    <a class="waves-effect waves-light btn"  onclick="avanti('sabato','domenica')">Successivo</a>
+                  </div>
+            </div>
+        <!--tab7-->
+          <div id="domenica" class="col s12" style="display:none;">
+              <h5 class="center-align">Primi</h5>
+                  <div class="card-panel">
+                      <div class="row">
+                          <div class="col s4">
+                                <img src="img.png" with="50px" height="50px"/>
+                              </div>
+                          <div class="col s4">
+
+                          </div>
+                          <div class="col s4">
+
+                          </div>
+                      </div>
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Secondi</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                <h5 class="center-align">Contorni</h5>
+                  <div class="card-panel">
+                    </div>
+                  <div class="card-panel">
+                    </div>
+                  <div class="input-field center-align">
+                      <a class="waves-effect waves-light btn"   onclick="indietro('domenica','sabato')">Indietro</a>
+                    <a class="waves-effect waves-light btn" type="submit">Invia<i class="material-icons right">input</i></a>
+                    </div>
+            </div>
+    </div>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
