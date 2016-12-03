@@ -51,8 +51,8 @@ app.listen(app.get('port'), function() {
 var Sequelize= require('sequelize');
 var pg= require('pg');
 
-//const connectionString = process.env.DATABASE_URL;
-const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
+const connectionString = process.env.DATABASE_URL;
+//const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
 var Conn = new Sequelize(connectionString);
 
 Conn
