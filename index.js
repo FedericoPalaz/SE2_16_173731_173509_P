@@ -33,26 +33,6 @@ app.use('/js',express.static(__dirname+'/js'));
 //setup port
 app.set('port', (process.env.PORT || 5000));
 
-/*
-app.get('/',function(req,res){
-    client.connect();
-    var query = client.query('SELECT * FROM prova');
-    query.on('row', function(row) {
-      res.render('prova',{title: row.cognome});
-    });
-});
-
-app.use('/ciao',function(req,res){
-    res.send('Hello World!!');
-});
-*/
-
-var Sequelize= require('sequelize');
-var pg= require('pg');
-
-//const connectionString = process.env.DATABASE_URL;
-const connectionString ='postgres://dbSW:password@localhost:5432/dbSW';
-var Conn = new Sequelize(connectionString);
 
 app.use('/db/init',function(req,res){
     db.initTables();
