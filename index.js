@@ -21,7 +21,7 @@ app.get('/',function(req,res){
     res.render('prova',{title: 'Funziona'});
 });
 
-app.post('/ciao',function(req,res){
+app.use('/ciao',function(req,res){
     res.send('Hello World!!');
 });
 
