@@ -284,4 +284,13 @@ function initDb() {
 }
 
 exports.initDb=initDb;*/
+
+function getPastiScelti(req,res) {
+    pasto_scelto.findAll({ include: [{model: user, required: true},{model: pasto, required: true}]}).then(function (result) {
+        console.log(JSON.stringify(result, null, '\t'));
+        res.send(JSON.stringify(result, null, '\t'));
+    });
+}
+
+exports.getPastiScelti=getPastiScelti;
 exports.initTables=initTables;
