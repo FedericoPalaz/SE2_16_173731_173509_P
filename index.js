@@ -40,6 +40,8 @@ app.use('/db/init',function(req,res){
 
 });
 
+app.use('/pastoScelto',db.getPastiScelti);
+
 //listening on port
 app.listen(app.get('port'), function() {
   console.log('app is up on port', app.get('port'));
