@@ -3,10 +3,23 @@ function apri(s)
    var x=document.getElementById(s);
     if(x.style.display=="none")
         {
+            document.getElementById("lunedi").style.display="none" ;
+            document.getElementById("martedi").style.display="none" ;
+            document.getElementById("mercoledi").style.display="none" ;
+            document.getElementById("giovedi").style.display="none" ;
+            document.getElementById("venerdi").style.display="none" ;
+            document.getElementById("sabato").style.display="none" ;
+            document.getElementById("domenica").style.display="none" ;
             x.style.display="block"
         }
     else
         {
-            x.style.display="none"
+            document.getElementById("lunedi").style.display="none" ;
+            document.getElementById("martedi").style.display="none" ;
+            document.getElementById("mercoledi").style.display="none" ;
+            document.getElementById("giovedi").style.display="none" ;
+            document.getElementById("venerdi").style.display="none" ;
+            document.getElementById("sabato").style.display="none" ;
+            document.getElementById("domenica").style.display="none" ;
         }
 }
