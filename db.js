@@ -2,8 +2,8 @@ var Sequelize= require('sequelize');
 var pg= require('pg');
 var insertData=require('./insertData.js');
 
-//const connectionString = process.env.DATABASE_URL;
-const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
+const connectionString = process.env.DATABASE_URL;
+//const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
 const user=Conn.define('users',{

@@ -12,7 +12,7 @@ var db= require('./db.js');
 /*
 //pg
 const pg = require('pg');
-const connectionString = process.env.DATABASE_URL;
+//const connectionString = process.env.DATABASE_URL;
 
 const client = new pg.Client(connectionString);
 */
