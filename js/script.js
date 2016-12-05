@@ -10,7 +10,7 @@ function apri(s)
             document.getElementById("venerdi").style.display="none" ;
             document.getElementById("sabato").style.display="none" ;
             document.getElementById("domenica").style.display="none" ;
-            x.style.display="block"
+            x.style.display="block";
         }
     else
         {
