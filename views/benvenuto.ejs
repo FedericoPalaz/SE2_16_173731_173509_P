@@ -50,15 +50,15 @@
                     </div>                
                     <div class="row">
                         <div class="col s3"><a>Secondo:</a></div>
-                        <div class="col s9"><a><%= lun.pasti[1].nome_pasto %></a></div>
+                        <div class="col s9"><a><%= lun.pasti[0].nome_pasto %></a></div>
                     </div>
                     <div class="row">
                         <div class="col s3"><a>Contorno:</a></div>
-                        <div class="col s9"><a><%= lun.pasti[2].nome_pasto %></a></div>
+                        <div class="col s9"><a><%= lun.pasti[0].nome_pasto %></a></div>
                     </div>
                      <div class="row">
                         <div class="col s3"><a>Dolce:</a></div>
-                        <div class="col s9"><a><%= lun.pasti[3].nome_pasto %></a></div>
+                        <div class="col s9"><a><%= lun.pasti[0].nome_pasto %></a></div>
                     </div>
                 <% }else{%>
                      <% for(var i=0; i<lun.pasti.length; i++) { %>
