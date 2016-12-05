@@ -1,370 +1,241 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
-    <title>Pagina di benvenuto</title>
-    <!--Import Google Icon Font-->
+<head>
+	<title>Pagina di benvenuto</title>
+	<!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../css/materialize.min.css"  media="screen,projection"/>
     <!--Import benvenuto.css-->
-    <link type="text/css" rel="stylesheet" href="../css/benvenuto.css" />
+    <link type="text/css" rel="stylesheet" href="../css/benvenuto.css"/>
     <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-  </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta charset="utf-8"/>
+</head>
 
-  <body>
-
+<body>
+    
     <!--navbar-->
-    <nav class="nav-extended">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo "><i><b>ASPS</b></i></a>
-        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="left material-icons">perm_identity</i>Mario Rossi</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a><i class="left material-icons">perm_identity</i>Mario Rossi</a></li>
-        </ul>
-        <ul class="side-nav" id="mobile-demo">
-          <li>
-            <a></a>
-          </li>
-        </ul>
-        <div class="tabs tabs-transparent" style="overflow:hidden">
-          <div class="center-align">
-            <h5><b>Scelta del menu</b></h5>
+     <nav class="nav-extended">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo "><i><b>ASPS</b></i></a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="left material-icons">perm_identity</i>Mario Rossi</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a><i class="left material-icons">perm_identity</i>Mario Rossi</a></li>
+          </ul> 
+          <ul class="side-nav" id="mobile-demo">
+                <li><a></a></li>
+            </ul>
+          <div class="tabs tabs-transparent" style="overflow:hidden">
+             <div class="center-align"><h5><b>Scelta del menu</b></h5></div>
           </div>
         </div>
-      </div>
-    </nav>
-    <div class="container">
-      <!--tab1-->
-      <div class=" card-panel col s12">
-        <div class="row" onclick="apri('lunedi')">
-          <div class="col s10"><span class="flow-text">Lunedì</span></div>
-          <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
-        </div>
-        <form action="#" method="post" id="lunedi" style="display:none">
-          <div class="row">
-            <div class="col s12"><a>Primi piatti:</a></div>
+      </nav>
+      <div class="container">
+         <!--LUNEDI-->
+          <div class=" card-panel col s12" >
+            <div class="row" onclick="apri('lunedi')">
+              <div class="col s10"><span class="flow-text">Lunedì</span></div>
+                 <% if(lun.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
+              </div>
+            <form action="#" method="post" id="lunedi"  class="sh">
+                <% if(lun.scelto == true){ %>
+                    <div class="row ">
+                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[0].nome_pasto %></a></div>
+                    </div>                
+                    <div class="row">
+                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[1].nome_pasto %></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[2].nome_pasto %></a></div>
+                    </div>
+                     <div class="row">
+                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[3].nome_pasto %></a></div>
+                    </div>
+                <% }else{%>
+                     <% for(var i=0; i<lun.pasti.length; i++) { %>
+                        <div class="row">
+                            <div class="col s12"><a>Primi piatti:</a></div>
+                        </div>     
+                        <% if(lun.pasti[i].tipo == 'primo'){ %>
+                            <div class="row" >
+                                <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s2"><input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                            </div>
+                        <% }%>  
+                        <div class="row">
+                                <div class="col s12"><a>Secondi piatti:</a></div>
+                            </div>
+                        <% if(lun.pasti[i].tipo == 'secondo'){ %>
+                        <div class="row">
+                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s4"><span>Dettagli</span></div>
+                             <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                        </div>
+                        <% }%> 
+                         <div class="row">
+                            <div class="col s12"><a>Contorni:</a></div>
+                        </div>
+                        <% if(lun.pasti[i].tipo == 'contorno'){ %>
+                        <div class="row">
+                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s4"><span>Dettagli</span></div>
+                             <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                        </div>
+                        <% }%> 
+                        <% if(lun.pasti[i].tipo == 'dolce'){ %>
+                        <div class="row">
+                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s4"><span>Dettagli</span></div>
+                             <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                        </div>
+                        <% }%>
+                <% }%>
+                    <div class="row">
+                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">send</i></button></div>
+                    </div>
+              </form>
           </div>
-            <% for(var i=0; i<lun.pasti.length; i++) { %>
-                <% if(lun.pasti[i].tipo == 'primo'){ %>
-                    <% if(lun.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= lun.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(lun.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
-                                <label for="lun<%= lun.pasti[i].id %>"><%= lun.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-        <div class="row">
-            <div class="col s12"><a>Secondi piatti:</a></div>
-        </div>
-          <% for(var i=0; i<lun.pasti.length; i++) { %>
-                <% if(lun.pasti[i].tipo == 'secondo'){ %>
-                    <% if(lun.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= lun.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(lun.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
-                                <label for="lun<%= lun.pasti[i].id %>"><%= lun.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-        <div class="row">
-            <div class="col s12"><a>Contorni:</a></div>
-        </div>
-            <% for(var i=0; i<lun.pasti.length; i++) { %>
-                <% if(lun.pasti[i].tipo == 'contorno'){ %>
-                    <% if(lun.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= lun.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(lun.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
-                                <label for="lun<%= lun.pasti[i].id %>"><%= lun.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-        <div class="row">
-            <div class="col s12"><a>Dessert:</a></div>
-        </div>
-            <% for(var i=0; i<lun.pasti.length; i++) { %>
-                <% if(lun.pasti[i].tipo == 'dolce'){ %>
-                    <% if(lun.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= lun.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(lun.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
-                                <label for="lun<%= lun.pasti[i].id %>"><%= lun.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-          <div class="row">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Invia
-                <i class="material-icons right">send</i>
-            </button>
+         <!--MARTEDI-->
+          <div class=" card-panel col s12" >
+            <div class="row apri" onclick="apri('martedi')">
+              <div class="col s10" ><span class="flow-text">Martedì</span></div>
+                <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+              </div>
+              
+            <div id="martedi" class="sh">
+                <div class="row">
+                    <div class="col s12"><a>Primi piatti:</a></div>
+                </div> 
+                
+                <div class="row" id="primo1">
+                    <div class="col s4 offset-s2"><span>Pasta al ragu</span></div>
+                    <div class="col s4"><span>Dettagli</span></div>
+                    <div class="col s2"><a class="btn-floating  waves-effect waves-light blue" ><i class="material-icons">add</i></a></div>
+                </div>
+                <div class="row" id="primo2">
+                    <div class="col s4 offset-s2"><span>Pasta al cervo</span></div>
+                    <div class="col s4"><span>Dettagli</span></div>
+                    <div class="col s2"><a class="btn-floating  waves-effect waves-light blue"><i class="material-icons">add</i></a></div>
+                </div>
+                
+                <div class="row">
+                    <div class="col s12"><a>Secondi piatti:</a></div>
+                </div>
+                 <div class="row">
+                    <div class="col s4 offset-s2"><span>Cotoletta alla milanese</span></div>
+                    <div class="col s4"><span>Dettagli</span></div>
+                     <div class="col s2"><a><i class="tiny material-icons">done</i></a></div>
+                </div>
+                <div class="row">
+                    <div class="col s4 offset-s2"><span>Carne di cavallo</span></div>
+                    <div class="col s4"><span>Dettagli</span></div>
+                    <div class="col s2"><a><i class="tiny material-icons">done</i></a></div>
+                </div>
+                <div class="row">
+                    <div class="col s2 offset-s4"><a  class="waves-effect waves-light btn ">invia</a></div>
+                </div>
+              </div>
           </div>
-        </form>
-      </div>
-      <!--tab2-->
-      <div class=" card-panel col s12">
-        <div class="row" onclick="apri('martedi')">
-          <div class="col s10"><span class="flow-text">Martedì</span></div>
-          <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
-        </div>
-
-        <form action="#" method="post" id="martedi" style="display:none">
-          <div class="row">
-            <div class="col s12"><a>Primi piatti:</a></div>
+        <!--MERCOLEDI-->
+          <div  class=" card-panel col s12" >
+            <div class="row" onclick="apri('mercoledi')">
+              <div class="col s10"><span class="flow-text">Mercoledì</span></div>
+                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+              </div>
+             <div id="mercoledi" class="sh">
+                <div class="row ">
+                    <div class="col s3"><a>Primo:</a></div>
+                    <div class="col s9"><a>Pasta al pomodoro</a></div>
+                </div>                
+                <div class="row">
+                    <div class="col s3"><a>Secondo:</a></div>
+                    <div class="col s9"><a>Cotoletta alla milanese</a></div>
+                </div>
+              </div>
           </div>
-            <% for(var i=0; i<mar.pasti.length; i++) { %>
-                <% if(mar.pasti[i].tipo == 'primo'){ %>
-                    <% if(mar.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= mar.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(mar.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
-                                <label for="mar<%= mar.pasti[i].id %>"><%= mar.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-        <div class="row">
-            <div class="col s12"><a>Secondi piatti:</a></div>
-        </div>
-          <% for(var i=0; i<mar.pasti.length; i++) { %>
-                <% if(mar.pasti[i].tipo == 'secondo'){ %>
-                    <% if(mar.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= mar.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(mar.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
-                                <label for="mar<%= mar.pasti[i].id %>"><%= mar.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-        <div class="row">
-            <div class="col s12"><a>Contorni:</a></div>
-        </div>
-            <% for(var i=0; i<mar.pasti.length; i++) { %>
-                <% if(mar.pasti[i].tipo == 'contorno'){ %>
-                    <% if(mar.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= mar.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(mar.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
-                                <label for="mar<%= mar.pasti[i].id %>"><%= mar.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-        <div class="row">
-            <div class="col s12"><a>Dessert:</a></div>
-        </div>
-            <% for(var i=0; i<mar.pasti.length; i++) { %>
-                <% if(mar.pasti[i].tipo == 'dolce'){ %>
-                    <% if(mar.scelto == true){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <P><%= mar.pasti[i].nome_pasto %><p>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                    <% if(mar.scelto == false){ %>
-                        <div class="row">
-                            <div class="col s2"></div>
-                            <div class="col s4">
-                                <input class="with-gap" name="primo" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
-                                <label for="mar<%= mar.pasti[i].id %>"><%= mar.pasti[i].nome_pasto %></label>
-                            </div>
-                            <div class="col s6"><p>Dettagli</p></div>
-                        </div>
-                    <% } %>
-                <% } %>
-            <% } %>
-          <div class="row">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Invia
-                <i class="material-icons right">send</i>
-            </button>
+        <!--GIOVEDI-->          
+          <div  class=" card-panel col s12" >
+            <div class="row" onclick="apri('giovedi')">
+              <div class="col s10"><span class="flow-text">Giovedì</span></div>
+                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+              </div>
+            <div id="giovedi" class="sh">
+                <div class="row ">
+                    <div class="col s3"><a>Primo:</a></div>
+                    <div class="col s9"><a>Pasta al pomodoro</a></div>
+                </div>                
+                <div class="row">
+                    <div class="col s3"><a>Secondo:</a></div>
+                    <div class="col s9"><a>Cotoletta alla milanese</a></div>
+                </div>
+              </div>
           </div>
-        </form>
-      </div>
-      <!--tab3-->
-      <div class=" card-panel col s12">
-        <div class="row" onclick="apri('mercoledi')">
-          <div class="col s10"><span class="flow-text">Mercoledì</span></div>
-          <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
-        </div>
-        <div id="mercoledi" style="display:none">
-          <div class="row ">
-            <div class="col s3"><a>Primo:</a></div>
-            <div class="col s9"><a>Pasta al pomodoro</a></div>
+        <!--VENERDI-->          
+          <div  class=" card-panel col s12" >
+            <div class="row" onclick="apri('venerdi')">
+              <div class="col s10"><span class="flow-text">Venerdì</span></div>
+                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+              </div>
+            <div id="venerdi" class="sh">
+                <div class="row ">
+                    <div class="col s3"><a>Primo:</a></div>
+                    <div class="col s9"><a>Pasta al pomodoro</a></div>
+                </div>                
+                <div class="row">
+                    <div class="col s3"><a>Secondo:</a></div>
+                    <div class="col s9"><a>Cotoletta alla milanese</a></div>
+                </div>
+              </div>
           </div>
-          <div class="row">
-            <div class="col s3"><a>Secondo:</a></div>
-            <div class="col s9"><a>Cotoletta alla milanese</a></div>
+        <!--SABATO-->   
+          <div  class=" card-panel col s12" >
+            <div class="row" onclick="apri('sabato')">
+              <div class="col s10"><span class="flow-text">Sabato</span></div>
+                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+              </div>
+            <div id="sabato" class="sh">
+                <div class="row ">
+                    <div class="col s3"><a>Primo:</a></div>
+                    <div class="col s9"><a>Pasta al pomodoro</a></div>
+                </div>                
+                <div class="row">
+                    <div class="col s3"><a>Secondo:</a></div>
+                    <div class="col s9"><a>Cotoletta alla milanese</a></div>
+                </div>
+              </div>
           </div>
-        </div>
-      </div>
-      <!--tab4-->
-      <div class=" card-panel col s12">
-        <div class="row" onclick="apri('giovedi')">
-          <div class="col s10"><span class="flow-text">Giovedì</span></div>
-          <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
-        </div>
-        <div id="giovedi" style="display:none">
-          <div class="row ">
-            <div class="col s3"><a>Primo:</a></div>
-            <div class="col s9"><a>Pasta al pomodoro</a></div>
+        <!--DOMENICA--> 
+          <div  class=" card-panel col s12" >
+            <div class="row " onclick="apri('domenica')">
+              <div class="col s10" style="line-height:50%"><span class="flow-text" >Domenica</span></div>
+                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+              </div>
+            <div id="domenica" class="sh">
+                <div class="row ">
+                    <div class="col s3"><a>Primo:</a></div>
+                    <div class="col s9"><a>Pasta al pomodoro</a></div>
+                </div>                
+                <div class="row">
+                    <div class="col s3"><a>Secondo:</a></div>
+                    <div class="col s9"><a>Cotoletta alla milanese</a></div>
+                </div>
+              </div>
           </div>
-          <div class="row">
-            <div class="col s3"><a>Secondo:</a></div>
-            <div class="col s9"><a>Cotoletta alla milanese</a></div>
-          </div>
-        </div>
-      </div>
-      <!--tab5-->
-      <div class=" card-panel col s12">
-        <div class="row" onclick="apri('venerdi')">
-          <div class="col s10"><span class="flow-text">Venerdì</span></div>
-          <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
-        </div>
-        <div id="venerdi" style="display:none">
-          <div class="row ">
-            <div class="col s3"><a>Primo:</a></div>
-            <div class="col s9"><a>Pasta al pomodoro</a></div>
-          </div>
-          <div class="row">
-            <div class="col s3"><a>Secondo:</a></div>
-            <div class="col s9"><a>Cotoletta alla milanese</a></div>
-          </div>
-        </div>
-      </div>
-      <!--tab6-->
-      <div class=" card-panel col s12">
-        <div class="row" onclick="apri('sabato')">
-          <div class="col s10"><span class="flow-text">Sabato</span></div>
-          <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
-        </div>
-        <div id="sabato" style="display:none">
-          <div class="row ">
-            <div class="col s3"><a>Primo:</a></div>
-            <div class="col s9"><a>Pasta al pomodoro</a></div>
-          </div>
-          <div class="row">
-            <div class="col s3"><a>Secondo:</a></div>
-            <div class="col s9"><a>Cotoletta alla milanese</a></div>
-          </div>
-        </div>
-      </div>
-      <!--tab7-->
-      <div class=" card-panel col s12">
-        <div class="row " onclick="apri('domenica')">
-          <div class="col s10" style="line-height:50%"><span class="flow-text">Domenica</span></div>
-          <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
-        </div>
-        <div id="domenica" style="display:none">
-          <div class="row ">
-            <div class="col s3"><a>Primo:</a></div>
-            <div class="col s9"><a>Pasta al pomodoro</a></div>
-          </div>
-          <div class="row">
-            <div class="col s3"><a>Secondo:</a></div>
-            <div class="col s9"><a>Cotoletta alla milanese</a></div>
-          </div>
-        </div>
-      </div>
     </div>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <!--Import script-->
     <script type="text/javascript" src="../js/script.js"></script>
-  </body>
-
+</body>
 </html>
