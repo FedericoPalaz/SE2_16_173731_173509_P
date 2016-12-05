@@ -64,10 +64,7 @@
                     <div class="row">
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
-                     <% for(var i=0; i<lun.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
+                     <% for(var i=0; i<lun.pasti.length; i++) { %>     
                         <% if(lun.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
@@ -77,11 +74,11 @@
                                 </div>
                             </div>
                         <% }%>  
-                    <% }%>  
+                    <% }%> 
+                      <div class="row">
+                        <div class="col s12"><a>Secondi piatti:</a></div>
+                    </div>
                     <% for(var i=0; i<lun.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(lun.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
@@ -92,10 +89,10 @@
                         </div>
                         <% }%>
                     <% }%>
+                    <div class="row">
+                        <div class="col s12"><a>Contorni:</a></div>
+                    </div>
                     <% for(var i=0; i<lun.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
                         <% if(lun.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
@@ -105,7 +102,10 @@
                             </div>
                         </div>
                         <% }%>
-                    <% }%> 
+                    <% }%>  
+                    <div class="row">
+                        <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<lun.pasti.length; i++) { %>
                         <% if(lun.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
@@ -127,7 +127,11 @@
           <div class=" card-panel col s12" >
             <div class="row apri" onclick="apri('martedi')">
               <div class="col s10" ><span class="flow-text">Martedì</span></div>
-                <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% if(mar.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>              
             <form action="#" method="post" id="martedi"  class="sh">
                 <% if(mar.scelto == true){ %>
@@ -151,10 +155,7 @@
                     <div class="row">
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
-                     <% for(var i=0; i<mar.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
+                     <% for(var i=0; i<mar.pasti.length; i++) { %>    
                         <% if(mar.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
@@ -164,11 +165,11 @@
                                 </div>
                             </div>
                         <% }%>  
-                    <% }%>  
+                    <% }%> 
+                    <div class="row">
+                        <div class="col s12"><a>Secondi piatti:</a></div>
+                    </div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(mar.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
@@ -179,10 +180,10 @@
                         </div>
                         <% }%>
                     <% }%>
+                    <div class="row">
+                        <div class="col s12"><a>Contorni:</a></div>
+                    </div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
                         <% if(mar.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
@@ -193,6 +194,9 @@
                         </div>
                         <% }%>
                     <% }%> 
+                    <div class="row">
+                        <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>
                         <% if(mar.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
@@ -214,7 +218,11 @@
           <div  class=" card-panel col s12" >
             <div class="row" onclick="apri('mercoledi')">
               <div class="col s10"><span class="flow-text">Mercoledì</span></div>
-                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% if(mer.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>
               <form action="#" method="post" id="mercoledi"  class="sh">
                 <% if(mer.scelto == true){ %>
@@ -238,10 +246,7 @@
                      <div class="row">
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
-                     <% for(var i=0; i<mer.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
+                     <% for(var i=0; i<mer.pasti.length; i++) { %>   
                         <% if(mer.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
@@ -252,10 +257,10 @@
                             </div>
                         <% }%>  
                     <% }%>  
+                    <div class="row">
+                        <div class="col s12"><a>Secondi piatti:</a></div>
+                    </div>
                     <% for(var i=0; i<mer.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(mer.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
@@ -266,10 +271,10 @@
                         </div>
                         <% }%>
                     <% }%>
+                    <div class="row">
+                        <div class="col s12"><a>Contorni:</a></div>
+                    </div>
                     <% for(var i=0; i<mer.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
                         <% if(mer.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
@@ -280,6 +285,9 @@
                         </div>
                         <% }%>
                     <% }%> 
+                    <div class="row">
+                        <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<mer.pasti.length; i++) { %>
                         <% if(mer.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
@@ -301,7 +309,11 @@
           <div  class=" card-panel col s12" >
             <div class="row" onclick="apri('giovedi')">
               <div class="col s10"><span class="flow-text">Giovedì</span></div>
-                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% if(gio.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>
             <form action="#" method="post" id="giovedi"  class="sh">
                 <% if(gio.scelto == true){ %>
@@ -325,10 +337,7 @@
                      <div class="row">
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
-                     <% for(var i=0; i<gio.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
+                     <% for(var i=0; i<gio.pasti.length; i++) { %>   
                         <% if(gio.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
@@ -338,11 +347,11 @@
                                 </div>
                             </div>
                         <% }%>  
-                    <% }%>  
+                    <% }%>          
+                    <div class="row">
+                       <div class="col s12"><a>Secondi piatti:</a></div>
+                    </div>
                     <% for(var i=0; i<gio.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(gio.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
@@ -353,10 +362,10 @@
                         </div>
                         <% }%>
                     <% }%>
+                    <div class="row">
+                        <div class="col s12"><a>Contorni:</a></div>
+                    </div>
                     <% for(var i=0; i<gio.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
                         <% if(gio.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
@@ -367,6 +376,9 @@
                         </div>
                         <% }%>
                     <% }%> 
+                     <div class="row">
+                        <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<gio.pasti.length; i++) { %>
                         <% if(gio.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
@@ -388,7 +400,11 @@
           <div  class=" card-panel col s12" >
             <div class="row" onclick="apri('venerdi')">
               <div class="col s10"><span class="flow-text">Venerdì</span></div>
-                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                 <% if(ven.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>
             <form action="#" method="post" id="venerdi"  class="sh">
                 <% if(ven.scelto == true){ %>
@@ -412,10 +428,7 @@
                      <div class="row">
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
-                     <% for(var i=0; i<ven.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
+                     <% for(var i=0; i<ven.pasti.length; i++) { %>   
                         <% if(ven.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
@@ -426,10 +439,10 @@
                             </div>
                         <% }%>  
                     <% }%>  
+                    <div class="row">
+                        <div class="col s12"><a>Secondi piatti:</a></div>
+                    </div>
                     <% for(var i=0; i<ven.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(ven.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
@@ -440,10 +453,10 @@
                         </div>
                         <% }%>
                     <% }%>
-                    <% for(var i=0; i<ven.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
+                    <div class="row">
+                         <div class="col s12"><a>Contorni:</a></div>
+                    </div>
+                    <% for(var i=0; i<ven.pasti.length; i++) { %> 
                         <% if(ven.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
@@ -454,6 +467,9 @@
                         </div>
                         <% }%>
                     <% }%> 
+                    <div class="row">
+                            <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<ven.pasti.length; i++) { %>
                         <% if(ven.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
@@ -475,7 +491,11 @@
           <div  class=" card-panel col s12" >
             <div class="row" onclick="apri('sabato')">
               <div class="col s10"><span class="flow-text">Sabato</span></div>
-                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                 <% if(sab.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>
             <form action="#" method="post" id="sabato"  class="sh">
                 <% if(sab.scelto == true){ %>
@@ -500,9 +520,6 @@
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<sab.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
                         <% if(sab.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
@@ -513,10 +530,10 @@
                             </div>
                         <% }%>  
                     <% }%>  
+                    <div class="row">
+                            <div class="col s12"><a>Secondi piatti:</a></div>
+                        </div>
                     <% for(var i=0; i<sab.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(sab.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
@@ -527,10 +544,10 @@
                         </div>
                         <% }%>
                     <% }%>
+                     <div class="row">
+                        <div class="col s12"><a>Contorni:</a></div>
+                    </div>
                     <% for(var i=0; i<sab.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
                         <% if(sab.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
@@ -541,6 +558,9 @@
                         </div>
                         <% }%>
                     <% }%> 
+                     <div class="row">
+                        <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
@@ -562,7 +582,11 @@
           <div  class=" card-panel col s12" >
             <div class="row " onclick="apri('domenica')">
               <div class="col s10" style="line-height:50%"><span class="flow-text" >Domenica</span></div>
-                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% if(dom.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>
             <form action="#" method="post" id="domenica"  class="sh">
                 <% if(dom.scelto == true){ %>
@@ -587,9 +611,6 @@
                         <div class="col s12"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<dom.pasti.length; i++) { %>
-                        <div class="row">
-                            <div class="col s12"><a>Primi piatti:</a></div>
-                        </div>     
                         <% if(dom.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
                                 <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
@@ -600,10 +621,10 @@
                             </div>
                         <% }%>  
                     <% }%>  
+                    <div class="row">
+                            <div class="col s12"><a>Secondi piatti:</a></div>
+                        </div>
                     <% for(var i=0; i<dom.pasti.length; i++) { %>
-                        <div class="row">
-                                <div class="col s12"><a>Secondi piatti:</a></div>
-                            </div>
                         <% if(dom.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
@@ -614,10 +635,10 @@
                         </div>
                         <% }%>
                     <% }%>
+                     <div class="row">
+                        <div class="col s12"><a>Contorni:</a></div>
+                    </div>
                     <% for(var i=0; i<dom.pasti.length; i++) { %>
-                         <div class="row">
-                            <div class="col s12"><a>Contorni:</a></div>
-                        </div>
                         <% if(dom.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
                             <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
@@ -628,6 +649,9 @@
                         </div>
                         <% }%>
                     <% }%> 
+                     <div class="row">
+                        <div class="col s12"><a>Dolce:</a></div>
+                    </div>
                     <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
