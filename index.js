@@ -140,7 +140,7 @@ app.get('/',function (req, res){
                   }
             }
             console.log(JSON.stringify(lun, null, '\t'));
-            res.render('benvenuto',{lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom});
+            res.render('myMenu',{lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom});
         })
     });
 })
