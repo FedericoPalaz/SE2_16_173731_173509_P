@@ -36,22 +36,74 @@
           <div class=" card-panel col s12" >
             <div class="row" onclick="apri('lunedi')">
               <div class="col s10"><span class="flow-text">Lunedì</span></div>
-                <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                 <% if(lun.scelto == true){ %>
+                    <div class="col s2"><span><i class="little material-icons">done_all</i></span></div>
+                <% }else{%>
+                    <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
+                <% }%>
               </div>
-            <div id="lunedi" class="sh">
-                <div class="row ">
-                    <div class="col s3"><a>Primo:</a></div>
-                    <div class="col s9"><a>Pasta al pomodoro</a></div>
-                </div>                
-                <div class="row">
-                    <div class="col s3"><a>Secondo:</a></div>
-                    <div class="col s9"><a>Cotoletta alla milanese</a></div>
-                </div>
-                <div class="row">
-                    <div class="col s3"><a>Contorno:</a></div>
-                    <div class="col s9"><a>Tiramisù</a></div>
-                </div>
-              </div>
+            <form action="#" method="post" id="lunedi"  class="sh">
+                <% if(lun.scelto == true){ %>
+                    <div class="row ">
+                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[0].nome_pasto %></a></div>
+                    </div>                
+                    <div class="row">
+                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[1].nome_pasto %></a></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[2].nome_pasto %></a></div>
+                    </div>
+                     <div class="row">
+                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s9"><a><%= lun.pasti[3].nome_pasto %></a></div>
+                    </div>
+                <% }else{%>
+                     <% for(var i=0; i<lun.pasti.length; i++) { %>
+                        <div class="row">
+                            <div class="col s12"><a>Primi piatti:</a></div>
+                        </div>     
+                        <% if(lun.pasti[i].tipo == 'primo'){ %>
+                            <div class="row" >
+                                <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s2"><input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                            </div>
+                        <% }%>  
+                        <div class="row">
+                                <div class="col s12"><a>Secondi piatti:</a></div>
+                            </div>
+                        <% if(lun.pasti[i].tipo == 'secondo'){ %>
+                        <div class="row">
+                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s4"><span>Dettagli</span></div>
+                             <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                        </div>
+                        <% }%> 
+                         <div class="row">
+                            <div class="col s12"><a>Contorni:</a></div>
+                        </div>
+                        <% if(lun.pasti[i].tipo == 'contorno'){ %>
+                        <div class="row">
+                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s4"><span>Dettagli</span></div>
+                             <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                        </div>
+                        <% }%> 
+                        <% if(lun.pasti[i].tipo == 'dolce'){ %>
+                        <div class="row">
+                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s4"><span>Dettagli</span></div>
+                             <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" /></div>
+                        </div>
+                        <% }%>
+                <% }%>
+                    <div class="row">
+                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">send</i></button></div>
+                    </div>
+              </form>
           </div>
          <!--MARTEDI-->
           <div class=" card-panel col s12" >
@@ -64,7 +116,7 @@
                 <div class="row">
                     <div class="col s12"><a>Primi piatti:</a></div>
                 </div> 
-                <div id="primi">
+                
                 <div class="row" id="primo1">
                     <div class="col s4 offset-s2"><span>Pasta al ragu</span></div>
                     <div class="col s4"><span>Dettagli</span></div>
@@ -75,7 +127,7 @@
                     <div class="col s4"><span>Dettagli</span></div>
                     <div class="col s2"><a class="btn-floating  waves-effect waves-light blue"><i class="material-icons">add</i></a></div>
                 </div>
-                </div>
+                
                 <div class="row">
                     <div class="col s12"><a>Secondi piatti:</a></div>
                 </div>
