@@ -131,7 +131,7 @@ app.get('/',function (req, res){
                       ven.pasti.push(result_menu_settimana[i].pasti);
                   }
                   if(parseInt(result_menu_settimana[i].giorno_id)==6){
-                    if(dom.scelto==false)
+                    if(sab.scelto==false)
                       sab.pasti.push(result_menu_settimana[i].pasti);
                   }
                   if(parseInt(result_menu_settimana[i].giorno_id)==7){
