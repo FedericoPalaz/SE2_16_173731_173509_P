@@ -34,7 +34,8 @@ function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
     //crea parimi
     pasto.create({
             nome_pasto: 'Pasta al pomodoro',
-            tipo: 'primo'
+            tipo: 'primo',
+            dettagli: 'Scaldate in una casseruola un velo di olio con uno spicchio di aglio sbucciato. Unite i pomodori non appena l\'aglio comincia a sfrigolare. Aggiungete quindi una generosa presa di sale. Completate con un ciuffetto di basilico e mescolate; cuocete senza coperchio per 10 circa.'
     });
     pasto.create({
             nome_pasto: 'Pasta bianca',
@@ -185,6 +186,11 @@ function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
     pasto_scelto.create({
         user_id: 1,
         pasto_id: 2,
+        giorno_id:1
+    });
+    pasto_scelto.create({
+        user_id: 1,
+        pasto_id: 7,
         giorno_id:1
     });
     pasto_scelto.create({

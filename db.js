@@ -2,8 +2,8 @@ var Sequelize= require('sequelize');
 var pg= require('pg');
 var insertData=require('./insertData.js');
 
-const connectionString = process.env.DATABASE_URL;
-//const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
+//const connectionString = process.env.DATABASE_URL;
+const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
 const user=Conn.define('users',{
@@ -23,7 +23,8 @@ const giorno=Conn.define('giorni',{
 
 const pasto=Conn.define('pasti',{
         nome_pasto: Sequelize.STRING,
-        tipo: Sequelize.STRING
+        tipo: Sequelize.STRING,
+        dettagli: Sequelize.TEXT
     },{
         timestamps:false,
         freezeTableName: true
@@ -52,16 +53,22 @@ menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 //questa funzione crea le tabelle
 function initTables() {
     Conn.sync({force:true}).then(function() {
-        insertData.insertData(user,giorno,pasto,menu_giorno,pasto_scelto); //inserisci dati in queste tabelle
+        insertData.insertData(user,giorno,pasto,menu_giorno,pasto_scelto); //inserisci dati dentro le tabelle
     });
 }
 
-function getPastiScelti(req,res) {
+function getPastiScelti(callBack) {
     pasto_scelto.findAll({ include: [{model: user, required: true},{model: pasto, required: true}]}).then(function (result) {
-        console.log(JSON.stringify(result, null, '\t'));
-        res.send(JSON.stringify(result, null, '\t'));
+        callBack (result); 
+    });
+}
+
+function getMenu(callBack) {
+    menu_giorno.findAll({include:[{model: pasto, required: true}]}).then(function (result) {
+       callBack (result); 
     });
 }
 
 exports.getPastiScelti=getPastiScelti;
 exports.initTables=initTables;
+exports.getMenu=getMenu;
