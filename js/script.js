@@ -1,3 +1,8 @@
+/**
+ * @brief Apri e chiude i menu a tendina
+ * @param [in|out] input -> id del menu che si deve aprire o chiudere in base al suo stato iniziale.
+ * @return .
+ */
 function apri(s)
 {
    var x=document.getElementById(s);
@@ -23,8 +28,4 @@ function apri(s)
             document.getElementById("domenica").style.display="none" ;
         }
 }
-$(document).ready(function(){
-    $(".btn-floating").click(function(){
-        window.alert($(this).parent().parent().parent().attr('id'));
-    });
-});
+

@@ -9,14 +9,6 @@ var app=express();
 //import db
 var db= require('./db.js');
 
-/*
-//pg
-const pg = require('pg');
-//const connectionString = process.env.DATABASE_URL;
-
-const client = new pg.Client(connectionString);
-*/
-
 //parser for url and json
 app.use(bodyParser.urlencoded({ extended: false }));    //parser for url
 app.use(bodyParser.json()); //parser for json
@@ -47,6 +39,7 @@ app.use('/stampa',function (req,res) {
         console.log(result_pasto_scelto);
     });
 });
+
 
 app.get('/',function (req, res){
     db.getMenu(function (result_menu_settimana) {
