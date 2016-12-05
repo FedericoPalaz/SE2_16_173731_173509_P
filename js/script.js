@@ -23,3 +23,8 @@ function apri(s)
             document.getElementById("domenica").style.display="none" ;
         }
 }
+$(document).ready(function(){
+    $(".btn-floating").click(function(){
+        window.alert($(this).parent().parent().parent().attr('id'));
+    });
+});
