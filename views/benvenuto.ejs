@@ -16,22 +16,17 @@
 <body>
     
     <!--navbar-->
-     <nav class="nav-extended">
+    <nav>
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo "><i><b>ASPS</b></i></a>
-            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="left material-icons">perm_identity</i>Mario Rossi</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a><i class="left material-icons">perm_identity</i>Mario Rossi</a></li>
-          </ul> 
-          <ul class="side-nav" id="mobile-demo">
-                <li><a></a></li>
+            <a class="brand-logo">ASPS</a>
+            <a data-activates="mobile-demo" class="button-collapse"><i class="left material-icons">perm_identity</i>Mario Rossi</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><i class="left material-icons">perm_identity</i><%= user.last_name %> <%= user.first_name %></li>
             </ul>
-          <div class="tabs tabs-transparent" style="overflow:hidden">
-             <div class="center-align"><h5><b>Scelta del menu</b></h5></div>
-          </div>
         </div>
-      </nav>
+    </nav>
       <div class="container">
+          <h4 class="center-align">Scelta del menu</h4>
          <!--LUNEDI-->
           <div class=" card-panel col s12" >
             <div class="row" onclick="apri('lunedi')">
@@ -42,49 +37,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>
-            <form action="#" method="post" id="lunedi" name="lunedi" class="sh">
+            <form action="/setDayMenu" method="post" id="lunedi" name="lunedi" class="sh">
                 <% if(lun.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s6 right-align"><a>Primo:</a></div>
                      <% for(var i=0; i<lun.pasti.length; i++) { %>     
                         <% if(lun.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= lun.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= lun.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                      <% for(var i=0; i<lun.pasti.length; i++) { %>     
                         <% if(lun.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= lun.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= lun.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                      <% for(var i=0; i<lun.pasti.length; i++) { %>     
                         <% if(lun.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= lun.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= lun.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                      <% for(var i=0; i<lun.pasti.length; i++) { %>     
                         <% if(lun.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= lun.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= lun.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>
                 <% }else{%>
+                    <input type="hidden" name="userid" value="<%= user.id %>">
+                    <input type="hidden" name="giornoid" value="1">
                     <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<lun.pasti.length; i++) { %>     
                         <% if(lun.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= lun.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
                                 <label for="lun<%= lun.pasti[i].id %>"></label>
                                 </div>
@@ -92,13 +89,13 @@
                         <% }%>  
                     <% }%> 
                       <div class="row">
-                        <div class="col s12"><a>Secondi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                     </div>
                     <% for(var i=0; i<lun.pasti.length; i++) { %>
                         <% if(lun.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= lun.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
                             <label for="lun<%= lun.pasti[i].id %>"></label>
                             </div>
@@ -106,13 +103,13 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s12"><a>Contorni:</a></div>
+                        <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<lun.pasti.length; i++) { %>
                         <% if(lun.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= lun.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
                             <label for="lun<%= lun.pasti[i].id %>"></label>
                             </div>
@@ -120,13 +117,13 @@
                         <% }%>
                     <% }%>  
                     <div class="row">
-                        <div class="col s12"><a>Dolce:</a></div>
+                        <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<lun.pasti.length; i++) { %>
                         <% if(lun.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= lun.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= lun.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= lun.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="lun<%= lun.pasti[i].id %>" value="<%= lun.pasti[i].id %>" />
                             <label for="lun<%= lun.pasti[i].id %>"></label>
                             </div>
@@ -134,7 +131,7 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
@@ -149,49 +146,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>              
-            <form action="#" method="post" id="martedi" name="martedi" class="sh">
+            <form action="/setDayMenu" method="post" id="martedi" name="martedi" class="sh">
                 <% if(mar.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s6 right-align"><a>Primo:</a></div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>    
                         <% if(mar.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= mar.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mar.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>    
                         <% if(mar.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= mar.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mar.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                         <% for(var i=0; i<mar.pasti.length; i++) { %>    
                         <% if(mar.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= mar.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mar.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>    
                         <% if(mar.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= mar.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mar.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
-                <% }else{%>                     
+                <% }else{%>
+                        <input type="hidden" name="userid" value="<%= user.id %>">
+                        <input type="hidden" name="giornoid" value="2">                     
                     <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<mar.pasti.length; i++) { %>    
                         <% if(mar.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= mar.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= mar.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
                                 <label for="mar<%= mar.pasti[i].id %>"></label>
                                 </div>
@@ -199,13 +198,13 @@
                         <% }%>  
                     <% }%> 
                     <div class="row">
-                        <div class="col s12"><a>Secondi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                     </div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>
                         <% if(mar.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= mar.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= mar.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
                             <label for="mar<%= mar.pasti[i].id %>"></label>
                             </div>
@@ -213,13 +212,13 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s12"><a>Contorni:</a></div>
+                        <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>
                         <% if(mar.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= mar.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= mar.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
                             <label for="mar<%= mar.pasti[i].id %>"></label>
                             </div>
@@ -227,13 +226,13 @@
                         <% }%>
                     <% }%> 
                     <div class="row">
-                        <div class="col s12"><a>Dolce:</a></div>
+                        <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<mar.pasti.length; i++) { %>
                         <% if(mar.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= mar.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= mar.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= mar.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="mar<%= mar.pasti[i].id %>" value="<%= mar.pasti[i].id %>" />
                             <label for="mar<%= mar.pasti[i].id %>"></label>
                             </div>
@@ -241,7 +240,7 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
@@ -256,49 +255,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>
-              <form action="#" method="post" id="mercoledi"  class="sh">
+              <form action="/setDayMenu" method="post" id="mercoledi"  class="sh">
                 <% if(mer.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>       
+                        <div class="col s6 right-align"><a>Primo:</a></div>       
                         <% for(var i=0; i<mer.pasti.length; i++) { %>   
                         <% if(mer.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= mer.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mer.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                         <% for(var i=0; i<mer.pasti.length; i++) { %>   
                         <% if(mer.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= mer.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mer.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                         <% for(var i=0; i<mer.pasti.length; i++) { %>   
                         <% if(mer.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= mer.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mer.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                         <% for(var i=0; i<mer.pasti.length; i++) { %>   
                         <% if(mer.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= mer.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= mer.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%> 
                     </div>
                 <% }else{%>
+                    <input type="hidden" name="userid" value="<%= user.id %>">
+                    <input type="hidden" name="giornoid" value="3">
                      <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<mer.pasti.length; i++) { %>   
                         <% if(mer.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= mer.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= mer.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="mer<%= mer.pasti[i].id %>" value="<%= mer.pasti[i].id %>" />
                                 <label for="mer<%= mer.pasti[i].id %>"></label>
                                 </div>
@@ -306,13 +307,13 @@
                         <% }%>  
                     <% }%>  
                     <div class="row">
-                        <div class="col s12"><a>Secondi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                     </div>
                     <% for(var i=0; i<mer.pasti.length; i++) { %>
                         <% if(mer.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= mer.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= mer.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="mer<%= mer.pasti[i].id %>" value="<%= mer.pasti[i].id %>" />
                             <label for="mer<%= mer.pasti[i].id %>"></label>
                             </div>
@@ -320,13 +321,13 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s12"><a>Contorni:</a></div>
+                        <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<mer.pasti.length; i++) { %>
                         <% if(mer.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= mer.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= mer.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="mer<%= mer.pasti[i].id %>" value="<%= mer.pasti[i].id %>" />
                             <label for="mer<%= mer.pasti[i].id %>"></label>
                             </div>
@@ -334,21 +335,21 @@
                         <% }%>
                     <% }%> 
                     <div class="row">
-                        <div class="col s12"><a>Dolce:</a></div>
+                        <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<mer.pasti.length; i++) { %>
                         <% if(mer.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= mer.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
-                             <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="mar<%= mer.pasti[i].id %>" value="<%= mer.pasti[i].id %>" />
+                            <div class="col s4"><span><%= mer.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= mer.pasti[i].dettagli %></span></div>
+                             <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="mer<%= mer.pasti[i].id %>" value="<%= mer.pasti[i].id %>" />
                             <label for="mer<%= mer.pasti[i].id %>"></label>
                             </div>
                         </div>
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
@@ -363,49 +364,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>
-            <form action="#" method="post" id="giovedi"  class="sh">
+            <form action="/setDayMenu" method="post" id="giovedi"  class="sh">
                 <% if(gio.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s6 right-align"><a>Primo:</a></div>
                      <% for(var i=0; i<gio.pasti.length; i++) { %>   
                         <% if(gio.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= gio.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= gio.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%>   
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                      <% for(var i=0; i<gio.pasti.length; i++) { %>   
                         <% if(gio.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= gio.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= gio.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                      <% for(var i=0; i<gio.pasti.length; i++) { %>   
                         <% if(gio.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= gio.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= gio.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                      <% for(var i=0; i<gio.pasti.length; i++) { %>   
                         <% if(gio.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= gio.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= gio.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                 <% }else{%>
+                    <input type="hidden" name="userid" value="<%= user.id %>">
+                    <input type="hidden" name="giornoid" value="4">
                      <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<gio.pasti.length; i++) { %>   
                         <% if(gio.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= gio.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= gio.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="gio<%= gio.pasti[i].id %>" value="<%= gio.pasti[i].id %>" />
                                 <label for="gio<%= gio.pasti[i].id %>"></label>
                                 </div>
@@ -413,13 +416,13 @@
                         <% }%>  
                     <% }%>          
                     <div class="row">
-                       <div class="col s12"><a>Secondi piatti:</a></div>
+                       <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                     </div>
                     <% for(var i=0; i<gio.pasti.length; i++) { %>
                         <% if(gio.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= gio.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= gio.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="gio<%= gio.pasti[i].id %>" value="<%= gio.pasti[i].id %>" />
                             <label for="gio<%= gio.pasti[i].id %>"></label>
                             </div>
@@ -427,13 +430,13 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s12"><a>Contorni:</a></div>
+                        <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<gio.pasti.length; i++) { %>
                         <% if(gio.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= gio.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= gio.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="gio<%= gio.pasti[i].id %>" value="<%= gio.pasti[i].id %>" />
                             <label for="gio<%= gio.pasti[i].id %>"></label>
                             </div>
@@ -441,13 +444,13 @@
                         <% }%>
                     <% }%> 
                      <div class="row">
-                        <div class="col s12"><a>Dolce:</a></div>
+                        <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<gio.pasti.length; i++) { %>
                         <% if(gio.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= gio.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= gio.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= gio.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="gio<%= gio.pasti[i].id %>" value="<%= gio.pasti[i].id %>" />
                             <label for="gio<%= gio.pasti[i].id %>"></label>
                             </div>
@@ -455,7 +458,7 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
@@ -470,49 +473,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>
-            <form action="#" method="post" id="venerdi"  class="sh">
+            <form action="/setDayMenu" method="post" id="venerdi"  class="sh">
                 <% if(ven.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s6 right-align"><a>Primo:</a></div>
                         <% for(var i=0; i<ven.pasti.length; i++) { %>   
                         <% if(ven.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= ven.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= ven.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%>  
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                         <% for(var i=0; i<ven.pasti.length; i++) { %>   
                         <% if(ven.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= ven.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= ven.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%>
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                         <% for(var i=0; i<ven.pasti.length; i++) { %>   
                         <% if(ven.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= ven.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= ven.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%>
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                         <% for(var i=0; i<ven.pasti.length; i++) { %>   
                         <% if(ven.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= ven.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= ven.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%>
                     </div>
                 <% }else{%>
+                    <input type="hidden" name="userid" value="<%= user.id %>">
+                    <input type="hidden" name="giornoid" value="5">
                      <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<ven.pasti.length; i++) { %>   
                         <% if(ven.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= ven.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= ven.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="ven<%= ven.pasti[i].id %>" value="<%= ven.pasti[i].id %>" />
                                 <label for="ven<%= ven.pasti[i].id %>"></label>
                                 </div>
@@ -520,13 +525,13 @@
                         <% }%>  
                     <% }%>  
                     <div class="row">
-                        <div class="col s12"><a>Secondi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                     </div>
                     <% for(var i=0; i<ven.pasti.length; i++) { %>
                         <% if(ven.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= ven.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= ven.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="ven<%= ven.pasti[i].id %>" value="<%= ven.pasti[i].id %>" />
                             <label for="ven<%= ven.pasti[i].id %>"></label>
                             </div>
@@ -534,13 +539,13 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                         <div class="col s12"><a>Contorni:</a></div>
+                         <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<ven.pasti.length; i++) { %> 
                         <% if(ven.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= ven.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= ven.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="ven<%= ven.pasti[i].id %>" value="<%= ven.pasti[i].id %>" />
                             <label for="ven<%= ven.pasti[i].id %>"></label>
                             </div>
@@ -548,13 +553,13 @@
                         <% }%>
                     <% }%> 
                     <div class="row">
-                            <div class="col s12"><a>Dolce:</a></div>
+                            <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<ven.pasti.length; i++) { %>
                         <% if(ven.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= ven.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= ven.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= ven.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="ven<%= ven.pasti[i].id %>" value="<%= ven.pasti[i].id %>" />
                             <label for="ven<%= ven.pasti[i].id %>"></label>
                             </div>
@@ -562,7 +567,7 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
@@ -577,49 +582,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>
-            <form action="#" method="post" id="sabato"  class="sh">
+            <form action="/setDayMenu" method="post" id="sabato"  class="sh">
                 <% if(sab.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s6 right-align"><a>Primo:</a></div>
                          <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= sab.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= sab.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%>  
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                          <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= sab.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= sab.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%>  
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                          <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= sab.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= sab.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%>  
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                          <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= sab.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= sab.pasti[i].nome_pasto %></div>
                        <% }%>  
                     <% }%>  
                     </div>
                 <% }else{%>
+                    <input type="hidden" name="userid" value="<%= user.id %>">
+                    <input type="hidden" name="giornoid" value="6">
                      <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= sab.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= sab.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="sab<%= sab.pasti[i].id %>" value="<%= sab.pasti[i].id %>" />
                                 <label for="sab<%= sab.pasti[i].id %>"></label>
                                 </div>
@@ -627,13 +634,13 @@
                         <% }%>  
                     <% }%>  
                     <div class="row">
-                            <div class="col s12"><a>Secondi piatti:</a></div>
+                            <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                         </div>
                     <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= sab.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= sab.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="sab<%= sab.pasti[i].id %>" value="<%= sab.pasti[i].id %>" />
                             <label for="sab<%= sab.pasti[i].id %>"></label>
                             </div>
@@ -641,13 +648,13 @@
                         <% }%>
                     <% }%>
                      <div class="row">
-                        <div class="col s12"><a>Contorni:</a></div>
+                        <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= sab.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= sab.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="sab<%= sab.pasti[i].id %>" value="<%= sab.pasti[i].id %>" />
                             <label for="sab<%= sab.pasti[i].id %>"></label>
                             </div>
@@ -655,13 +662,13 @@
                         <% }%>
                     <% }%> 
                      <div class="row">
-                        <div class="col s12"><a>Dolce:</a></div>
+                        <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<sab.pasti.length; i++) { %>
                         <% if(sab.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= sab.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= sab.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= sab.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="sab<%= sab.pasti[i].id %>" value="<%= sab.pasti[i].id %>" />
                             <label for="sab<%= sab.pasti[i].id %>"></label>
                             </div>
@@ -669,7 +676,7 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
@@ -684,49 +691,51 @@
                     <div class="col s2"><span><i class="little material-icons">settings</i></span></div>
                 <% }%>
               </div>
-            <form action="#" method="post" id="domenica"  class="sh">
+            <form action="/setDayMenu" method="post" id="domenica"  class="sh">
                 <% if(dom.scelto == true){ %>
                     <div class="row ">
-                        <div class="col s3"><a>Primo:</a></div>
+                        <div class="col s6 right-align"><a>Primo:</a></div>
                      <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'primo'){ %>
-                        <div class="col s9"><a><%= dom.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= dom.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>                
                     <div class="row">
-                        <div class="col s3"><a>Secondo:</a></div>
+                        <div class="col s6 right-align"><a>Secondo:</a></div>
                      <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'secondo'){ %>
-                        <div class="col s9"><a><%= dom.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= dom.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                     <div class="row">
-                        <div class="col s3"><a>Contorno:</a></div>
+                        <div class="col s6 right-align"><a>Contorno:</a></div>
                      <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'contorno'){ %>
-                        <div class="col s9"><a><%= dom.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= dom.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                      <div class="row">
-                        <div class="col s3"><a>Dolce:</a></div>
+                        <div class="col s6 right-align"><a>Dolce:</a></div>
                      <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'dolce'){ %>
-                        <div class="col s9"><a><%= dom.pasti[i].nome_pasto %></a></div>
+                        <div class="col s6"><%= dom.pasti[i].nome_pasto %></div>
                         <% }%>  
                     <% }%> 
                     </div>
                 <% }else{%>
+                    <input type="hidden" name="userid" value="<%= user.id %>">
+                    <input type="hidden" name="giornoid" value="7">
                      <div class="row">
-                        <div class="col s12"><a>Primi piatti:</a></div>
+                        <div class="col s12 center-align"><a>Primi piatti:</a></div>
                     </div>
                      <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'primo'){ %>
                             <div class="row" >
-                                <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
-                                <div class="col s4"><span>Dettagli</span></div>
+                                <div class="col s4"><span><%= dom.pasti[i].nome_pasto %></span></div>
+                                <div class="col s6"><span><%= dom.pasti[i].dettagli %></span></div>
                                 <div class="col s2"><input class="with-gap" name="primo" type="radio" id="dom<%= dom.pasti[i].id %>" value="<%= dom.pasti[i].id %>" />
                                 <label for="dom<%= dom.pasti[i].id %>"></label>
                                 </div>
@@ -734,13 +743,13 @@
                         <% }%>  
                     <% }%>  
                     <div class="row">
-                            <div class="col s12"><a>Secondi piatti:</a></div>
+                            <div class="col s12 center-align"><a>Secondi piatti:</a></div>
                         </div>
                     <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'secondo'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= dom.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= dom.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="secondo" type="radio" id="dom<%= dom.pasti[i].id %>" value="<%= dom.pasti[i].id %>" />
                             <label for="dom<%= dom.pasti[i].id %>"></label>
                             </div>
@@ -748,13 +757,13 @@
                         <% }%>
                     <% }%>
                      <div class="row">
-                        <div class="col s12"><a>Contorni:</a></div>
+                        <div class="col s12 center-align"><a>Contorni:</a></div>
                     </div>
                     <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'contorno'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= dom.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= dom.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="contorno" type="radio" id="dom<%= dom.pasti[i].id %>" value="<%= dom.pasti[i].id %>" />
                             <label for="dom<%= dom.pasti[i].id %>"></label>
                             </div>
@@ -762,13 +771,13 @@
                         <% }%>
                     <% }%> 
                      <div class="row">
-                        <div class="col s12"><a>Dolce:</a></div>
+                        <div class="col s12 center-align"><a>Dolce:</a></div>
                     </div>
                     <% for(var i=0; i<dom.pasti.length; i++) { %>
                         <% if(dom.pasti[i].tipo == 'dolce'){ %>
                         <div class="row">
-                            <div class="col s4 offset-s2"><span><%= dom.pasti[i].nome_pasto %></span></div>
-                            <div class="col s4"><span>Dettagli</span></div>
+                            <div class="col s4"><span><%= dom.pasti[i].nome_pasto %></span></div>
+                            <div class="col s6"><span><%= dom.pasti[i].dettagli %></span></div>
                              <div class="col s2"><input class="with-gap" name="dolce" type="radio" id="dom<%= dom.pasti[i].id %>" value="<%= dom.pasti[i].id %>" />
                             <label for="dom<%= dom.pasti[i].id %>"></label>
                             </div>
@@ -776,7 +785,7 @@
                         <% }%>
                     <% }%>
                     <div class="row">
-                        <div class="col s2 offset-s4"><button class="btn waves-effect waves-light" type="submit"name="action">Invia<i class="material-icons right">input</i></button></div>
+                        <div class="col s12 center-align"><button class="btn waves-effect waves-light" type="submit" name="action"><i class="material-icons right">save</i>salva</button></div>
                     </div>
                 <% }%>
               </form>
