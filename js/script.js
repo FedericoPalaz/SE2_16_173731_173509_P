@@ -30,7 +30,7 @@ function apri(s)
 }
 
 $(document).ready(function(){
-    $(.btn).click(function(){
+    $(".btn").click(function(){
         var id=$(.btn).parent().parent().parent().attr('id');
         window.alert(id);
         var form=document.getElementById(id);
