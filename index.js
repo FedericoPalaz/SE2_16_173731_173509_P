@@ -30,8 +30,7 @@ app.set('port', (process.env.PORT || 5000));
 
 app.use('/db/init',function(req,res){
     db.initTables();
-    res.send('Fatto, Controlla nel db se ho creato tabella user e inserito Jhon ');
-
+    res.redirect('/');
 });
 
 // mapping apis
