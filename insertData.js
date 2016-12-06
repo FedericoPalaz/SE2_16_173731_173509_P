@@ -1,6 +1,7 @@
+//import random.js
 var random=require('./random.js');
 
-
+//funzione che inserisce i valori casuali alle tabelle
 function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
     //crea un user
     user.create({

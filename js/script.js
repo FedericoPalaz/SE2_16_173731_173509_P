@@ -29,3 +29,22 @@ function apri(s)
         }
 }
 
+$(document).ready(function(){
+    $(.btn).click(function(){
+        var id=$(.btn).parent().parent().parent().attr('id');
+        window.alert(id);
+        var form=document.getElementById(id);
+        window.alert(form);
+        var primo = document.form.primo.value;
+        window.alert(primo);
+        var secondo = document.form.secondo.value;
+        var contorno = form.contorno.value;
+        var dolce = form.dolce.value;
+        
+        if ((primo == "") || (primo == "undefined")) {
+            alert("Non hai scelto nessun primo. E' obligatorio!");
+            document.form.primo.focus();
+            return false;
+        }
+    });
+});
