@@ -32,8 +32,9 @@ function apri(s)
 $(document).ready(function(){
     $(".btn").click(function(){
         var name=$(this).parent().parent().parent().attr('name');
+        window.alert(name);
         var primo = document.name.primo.value;
-        window.alert(primo);
+        window.alert(document.name.primo.value);
         var secondo = document.name.secondo.value;
         var contorno = document.name.contorno.value;
         var dolce = document.name.dolce.value;
