@@ -34,7 +34,7 @@ $(document).ready(function(){
         var name=$(this).parent().parent().parent().attr('name');
         window.alert(name);
         //var primo = $('input[name="primo"]:checked').val();
-        window.alert(document.forms.name.primo.value);
+        window.alert(document.forms.name.primo.value());
         /*var secondo = document.name.secondo.value;
         var contorno = document.name.contorno.value;
         var dolce = document.name.dolce.value;
