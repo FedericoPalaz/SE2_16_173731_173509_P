@@ -34,7 +34,7 @@ $(document).ready(function(){
         var name=$(this).parent().parent().parent().attr('name');
         window.alert(name);
         var primo = -1;
-        for (i=0;i<document.name.primo.length;i++) {
+        for (var i=0;i<document.name.primo.length;i++) {
             if (document.name.primo[i].checked) {
                 primo = document.name.primo[i].value;
                 window.alert(primo);
