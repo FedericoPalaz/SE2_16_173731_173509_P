@@ -33,6 +33,13 @@ $(document).ready(function(){
     $(".btn").click(function(){
         var name=$(this).parent().parent().parent().attr('name');
         window.alert(name);
+        var primo = -1;
+        for (i=0;i<document.name.primo.length;i++) {
+            if (document.name.primo[i].checked) {
+                primo = document.name.primo[i].value;
+                window.alert(primo);
+            }
+        }
         //var primo = $('input[name="primo"]:checked').val();
         window.alert(document.forms.name.primo.value());
         /*var secondo = document.name.secondo.value;
