@@ -5,12 +5,12 @@ var pg= require('pg');              //pg library
 var insertData=require('./insertData.js'); 
 
 //Connessione al db
-const connectionString = process.env.DATABASE_URL;
-//const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
+//const connectionString = process.env.DATABASE_URL;
+const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
 //dichiarazione tabella user
-const user=Conn.define('users',{
+const user=Conn.define('user',{
         first_name: Sequelize.STRING,
         last_name: Sequelize.STRING
     },{
@@ -59,36 +59,46 @@ menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
 
 //questa funzione crea le tabelle
-function initTables() {
+function initTables(req, res) {
     Conn.sync({force:true}).then(function() {
         insertData.insertData(user,giorno,pasto,menu_giorno,pasto_scelto); //inserisci dati dentro le tabelle
+    }).then(function () {
+            res.redirect('/');
+    }).catch(function (err) {
+        res.render('500');
     });
 }
 
 //Funzioni che ritorna la lista dei pasti scelti dal utente
-function getPastiScelti(id, callBack) {
+function getPastiScelti(res, id, callBack) {
     pasto_scelto.findAll({where:{ user_id: id}, include: [{model: user, required: true},{model: pasto, required: true}]}).then(function (result) {
         callBack (result); 
+    }).catch(function (err) {
+        res.render('500');
     });
 }
 
 //Funzioni che ritorna la lista del menu
-function getMenu(callBack) {
+function getMenu(res, callBack) {
     menu_giorno.findAll({include:[{model: pasto, required: true}]}).then(function (result) {
        callBack (result); 
+    }).catch(function (err) {
+        res.render('500');
     });
 }
 
 //Funzioni che ritorna un user
-function getUserById(id, callBack) {
+function getUserById(res, id, callBack) {
     user.findById(id).then(function (result) {
         callBack (result); 
-    })
+    }).catch(function (err) {
+        res.render('500');
+    });
 }
 
 function getMenuToShow(req, res) {
     var user_id= 1;
-    getMenu(function (result_menu_settimana) {
+    getMenu(res, function (result_menu_settimana) {
         var lun={
           scelto: false,
           pasti: []
@@ -117,7 +127,7 @@ function getMenuToShow(req, res) {
           scelto: false,
           pasti: []
         };
-        getPastiScelti(user_id, function (result_pasto_scelto) {
+        getPastiScelti(res, user_id, function (result_pasto_scelto) {
             for(var i = 0; i< result_pasto_scelto.length; i++){
                 if(parseInt(result_pasto_scelto[i].giorno_id)==1){
                   lun.scelto=true;
@@ -180,7 +190,7 @@ function getMenuToShow(req, res) {
             }
 
             //user
-            getUserById(user_id, function (result_user) {
+            getUserById(res, user_id, function (result_user) {
                 res.render('benvenuto', {lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom, user: result_user});
             })
         })
@@ -188,32 +198,45 @@ function getMenuToShow(req, res) {
 }
 
 function setUserMenu(req, res) {
-    pasto_scelto.create({
-        user_id: req.body.userid,
-        pasto_id: req.body.primo,
-        giorno_id: req.body.giornoid
-    }).then(function () {
-        pasto_scelto.create({
-            user_id: req.body.userid,
-            pasto_id: req.body.secondo,
-            giorno_id: req.body.giornoid
-        });
-    }).then(function () {
-        pasto_scelto.create({
-            user_id: req.body.userid,
-            pasto_id: req.body.contorno,
-            giorno_id: req.body.giornoid
-        });
-    }).then(function () {
-        pasto_scelto.create({
-            user_id: req.body.userid,
-            pasto_id: req.body.dolce,
-            giorno_id: req.body.giornoid
-        });
-    }).then(function () {
-        res.redirect('/');
-    });
-    
+    if(typeof req.body!='undefined' && req.body){ //verifico se body di post e' definito o no
+        var primo=req.body.primo;
+        var secondo=req.body.secondo;
+        var contorno=req.body.contorno;
+        var dolce=req.body.contorno;
+
+        if(primo != 'undefined' || secondo != 'undefined' || contorno != 'undefined' || dolce != 'undefined'){ //se almeno utente ha scelto un pasto, allora salvo nel db
+            pasto_scelto.create({
+                user_id: req.body.userid,
+                pasto_id: req.body.primo,
+                giorno_id: req.body.giornoid
+            }).then(function () {
+                pasto_scelto.create({
+                    user_id: req.body.userid,
+                    pasto_id: req.body.secondo,
+                    giorno_id: req.body.giornoid
+                });
+            }).then(function () {
+                pasto_scelto.create({
+                    user_id: req.body.userid,
+                    pasto_id: req.body.contorno,
+                    giorno_id: req.body.giornoid
+                });
+            }).then(function () {
+                pasto_scelto.create({
+                    user_id: req.body.userid,
+                    pasto_id: req.body.dolce,
+                    giorno_id: req.body.giornoid
+                });
+            }).then(function () {
+                res.send('1'); //inserito pasti
+            }).catch(function (err){ //catch db errors
+                res.send('-2'); //internel db error
+            })
+        }
+    }
+    else{
+        res.send('-1'); //post body è vuoto
+    }
 }
 
 exports.initTables = initTables;

@@ -1,0 +1,22 @@
+/* line 1, ../sass/login.scss */
+body {
+  background-color: #d32f2f;
+}
+/* line 3, ../sass/login.scss */
+body #msg-box {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  width: 600px;
+  height: 200px;
+  margin-top: -100px;
+  margin-left: -300px;
+}
+
+body #msg-box h1, h4{
+    font-family: 'Courgette', cursive;
+}
+
+body #msg-box h1{
+    font-size: 200px;
+}

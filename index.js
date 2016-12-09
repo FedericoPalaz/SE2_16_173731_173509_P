@@ -27,16 +27,16 @@ app.use('/js',express.static(__dirname+'/js'));
 //setup port
 app.set('port', (process.env.PORT || 5000));
 
+//mapping Apis
+app.use('/db/init', db.initTables);
 
-app.use('/db/init',function(req,res){
-    db.initTables();
-    res.redirect('/');
-});
-
-// mapping apis
 app.get('/', db.getMenuToShow);
 
 app.post('/setDayMenu', db.setUserMenu);
+
+app.use('*', function (req, res) {
+  res.render('404');
+})
 
 //listening on port
 app.listen(app.get('port'), function() {

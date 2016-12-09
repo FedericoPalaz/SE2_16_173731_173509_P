@@ -201,7 +201,7 @@ function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
     }
 
     //create Menu scelto dal user num 1
-    pasto_scelto.create({
+    /*pasto_scelto.create({
         user_id: 1,
         pasto_id: 2,
         giorno_id:1
@@ -220,7 +220,7 @@ function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
         user_id: 1,
         pasto_id: 17,
         giorno_id:1
-    });
+    });*/
 }
 
 exports.insertData=insertData;

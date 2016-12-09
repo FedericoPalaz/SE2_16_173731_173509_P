@@ -29,28 +29,38 @@ function apri(s)
         }
 }
 
-$(document).ready(function(){
-    $(".btn").click(function(){
-        var name=$(this).parent().parent().parent().attr('name');
-        window.alert(name);
-        var primo = -1;
-        for (var i=0;i<document.name.primo.length;i++) {
-            if (document.name.primo[i].checked) {
-                primo = document.name.primo[i].value;
-                window.alert(primo);
+//invia richiesta al server per salvare i pasti scelti
+function salvaPasti(form_id) {
+    if(verficaForm(form_id)){ //se l'utente ha inserito almeno un un pasto allora invia la richiesta di salvare al server api
+        var form_id_S='#'+form_id;
+        $.post( "/setDayMenu", $( form_id_S ).serialize(), function (data, status) {
+            
+            if(data=='1'){
+                Materialize.toast('Successo: Salvato i tuoi pasti', 5000, 'green accent-3');
+                window.setTimeout(function () {
+                    location.href = "/";
+                }, 5000);
             }
+            if(data=='-1')
+                Materialize.toast('Errore!!: Post Body Vuoto', 5000, 'red darken-1');
+            if(data=='-2')
+                Materialize.toast('Internel Errore!! Riprova dopo', 5000, 'red darken-1');
+        });
+    }
+    else
+        Materialize.toast('Alert!!: Devi inserire almeno un pasto !!!', 5000, 'amber darken-3');
+}
+
+//verifica se utente ha inserito almeno un pasto
+function verficaForm(form_id) {
+    var checkedOne=false;
+    var query='form#'+form_id+' input[type=radio]';
+    $(query).each(function(){
+        var input = $(this); // This is the jquery object of the input, do what you will
+        if (input.prop("checked")){
+            checkedOne=true;
         }
-        //var primo = $('input[name="primo"]:checked').val();
-        window.alert(document.forms.name.primo.value());
-        /*var secondo = document.name.secondo.value;
-        var contorno = document.name.contorno.value;
-        var dolce = document.name.dolce.value;
-        
-        if ((primo == "") || (primo == "undefined")) {
-            alert("Non hai scelto nessun primo. E' obligatorio!");
-            document.form.primo.focus();
-            return false;
-        }
-        return false;*/
     });
-});
+    return checkedOne;
+}
+

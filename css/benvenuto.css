@@ -14,8 +14,17 @@ body #box {
   margin-left: -150px;
   /*set to a negative number 1/2 of your width*/
 }
-
 .sh
 {
     display:none;
+}
+.container{
+  margin-top: 50px;
+}
+.nav-wrapper{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.brand-logo{
+  font-family: 'Courgette', cursive;
 }
