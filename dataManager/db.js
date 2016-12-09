@@ -5,8 +5,8 @@ var pg= require('pg');              //pg library
 var insertData=require('./insertData.js'); 
 
 //Connessione al db
-//const connectionString = process.env.DATABASE_URL;
-const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
+const connectionString = process.env.DATABASE_URL;
+//const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
 //dichiarazione tabella user

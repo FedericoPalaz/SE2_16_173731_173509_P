@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));    //parser for url
 app.use(bodyParser.json()); //parser for json
 
 //import db
-var db= require('./db.js');
+var db= require('./dataManager/db.js');
 
 //view engine setup
 app.set('views', path.join(__dirname, 'views'));
