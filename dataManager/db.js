@@ -92,7 +92,6 @@ const menu_giorno=Conn.define('menu_giorni',{},{
 menu_giorno.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
 menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
-
 /**
      * @brief Funzione che crea le tabelle con dati casuali.
      * @return Description of returned value.
