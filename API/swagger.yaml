@@ -1,0 +1,88 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: ASPS
+  description: Ordina e visualizza pasti
+  version: "1.0.0"
+# the domain of the service
+host: progettosw2.herokuapp.com
+# array of all schemes that your API supports
+schemes:
+  - https
+
+
+paths:
+  /:
+    get:
+
+      description: |
+        Ritorna un array per ogni giorno con i pasti scelti o da scegliere e una variabile con l'utente
+
+      responses:
+        200:
+          description: Array di pasti
+          schema:
+            type: array
+            items:
+             title: pasto
+             type: object
+             properties:
+              nome:
+                type: string
+              tipo:
+                type: string
+              descrizione:
+                type: string
+              
+        default:
+          description: Unexpected error
+          
+  /setDayMenu:
+    post:
+      description: |
+        Imposta il menu al utente loggato
+      parameters:
+        - name: primo
+          in: query
+          description: pasto scelto come primo.
+          required: true
+          type: string
+        - name: secondo
+          in: query
+          description: pasto scelto come secondo.
+          required: true
+          type: string
+        - name: contorno
+          in: query
+          description: pasto scelto come contorno.
+          required: true
+          type: string
+        - name: dolce
+          in: query
+          description: pasto scelto come dolce.
+          required: true
+          type: string
+
+      responses:
+        200:
+          description: Tutto ok
+        400:
+          description: Errore, body vuoto
+        500:
+          description: Errore del server
+        default:
+          description: Unexpected error
+          
+  /db/init:
+    post:
+      description: Serve per iniziallizare le tabella da un punto iniziale
+
+      responses:
+        200:
+          description: Tutto ok
+        500:
+          description: Errore del server
+        default:
+          description: Unexpected error
+

@@ -155,7 +155,7 @@ function getUserById(res, id, callBack) {
  * @brief Restituisce il menu per vedere sulla pagina.
  * @param [in|out] input--> la richiesta.
  * @param [in|out] input--> la risposta.
- * @return Description of returned value.
+ * @return la pagina di benvenuto.
  */
 function getMenuToShow(req, res) {
     var user_id= 1;
@@ -261,6 +261,7 @@ function getMenuToShow(req, res) {
  * @brief Imposto il menu all'utente. 
  * @param [in|out] input--> la richiesta.
  * @param [in|out] input--> la risposta.
+ * @param [in|out] output--> 200 se andato a buon fine | 500 internal server db | 404 se non ha scelto tutti i pasti.
  * @return Description of returned value.
  */
 function setUserMenu(req, res) {
@@ -294,14 +295,14 @@ function setUserMenu(req, res) {
                     giorno_id: req.body.giornoid
                 });
             }).then(function () {
-                res.send('1'); //inserito pasti
+                res.send('200'); //inserito pasti
             }).catch(function (err){ //catch db errors
-                res.send('-2'); //internel db error
+                res.send('500'); //internel db error
             })
         }
     }
     else{
-        res.send('-1'); //post body è vuoto
+        res.send('404'); //post body è vuoto
     }
 }
 
