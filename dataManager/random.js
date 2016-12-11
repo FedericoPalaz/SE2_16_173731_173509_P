@@ -21,5 +21,11 @@ function getNum() {
     return numbers.pop();
 }
 
+// @return array number Length 
+function getLength() {
+    return numbers.getLength;
+}
+
 exports.init=init;
 exports.getNum=getNum;
+exports.getLength=getLength;
