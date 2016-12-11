@@ -3,14 +3,10 @@ describe("random", function () {
     var min=1;
     var max=10;
     var result=max-min+1;
-    it("should init numerbers", function (done) {
+    it("should init numbers", function (done) {
         done();
         random.init(min, max);
-        expect(random.getLength).toEqual(result);     
+        console.log(random.getLength());
+        expect(random.getLength()).toEqual(result);     
     });
-    it("should return udefined if the arry is not createrd", function (done) {
-        done();
-        expect(random.getLength).toEqual('udefined');     
-    });
-
 });

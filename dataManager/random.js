@@ -10,7 +10,7 @@ var numbers;
  */
 function init(min,max) {
     numbers=[];
-    for(var i=min;i<=max;i++){
+    for(var i=min;i<max;i++){
         numbers[i]=i;
     }
     shuffle(numbers);
@@ -23,7 +23,7 @@ function getNum() {
 
 // @return array number Length 
 function getLength() {
-    return numbers.getLength;
+    return numbers.length;
 }
 
 exports.init=init;
