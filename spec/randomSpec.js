@@ -1,10 +1,16 @@
+var random= require('../dataManager/random.js');
 describe("random", function () {
-    var random= require('../dataManager/random.js');
     var min=1;
     var max=10;
-
-    if('should init numerbers', function () {
+    var result=max-min+1;
+    it("should init numerbers", function (done) {
+        done();
         random.init(min, max);
-        expect(random.getLength).toEqual((max-min+1));     
+        expect(random.getLength).toEqual(result);     
     });
+    it("should return udefined if the arry is not createrd", function (done) {
+        done();
+        expect(random.getLength).toEqual('udefined');     
+    });
+
 });
