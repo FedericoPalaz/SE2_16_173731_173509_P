@@ -21,5 +21,6 @@ function getNum() {
     return numbers.pop();
 }
 
+//esporta funzioni
 exports.init=init;
 exports.getNum=getNum;

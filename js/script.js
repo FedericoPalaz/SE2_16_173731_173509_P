@@ -29,7 +29,12 @@ function apri(s)
         }
 }
 
-//invia richiesta al server per salvare i pasti scelti
+
+/**
+ * @brief Invia la richiesta al server per dalvare i dati.
+ * @param [in|out] input-> id della form.
+ * @return un popup in caso di errore.
+ */
 function salvaPasti(form_id) {
     if(verficaForm(form_id)){ //se l'utente ha inserito almeno un un pasto allora invia la richiesta di salvare al server api
         var form_id_S='#'+form_id;
@@ -51,7 +56,12 @@ function salvaPasti(form_id) {
         Materialize.toast('Alert!!: Devi inserire almeno un pasto !!!', 5000, 'amber darken-3');
 }
 
-//verifica se utente ha inserito almeno un pasto
+/**
+ * @brief verifica se un utente ha inserito almeno un pasto.
+ * @param [in|out] input--> id della form.
+ * @param [in|out] output--> boolean 
+ * @return true se ne trova alemno uno altrimenti rimane false.
+ */
 function verficaForm(form_id) {
     var checkedOne=false;
     var query='form#'+form_id+' input[type=radio]';
