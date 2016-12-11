@@ -6,7 +6,6 @@ describe("random", function () {
     it("should init numbers", function (done) {
         done();
         random.init(min, max);
-        console.log(random.getLength());
         expect(random.getLength()).toEqual(result);     
     });
 });
