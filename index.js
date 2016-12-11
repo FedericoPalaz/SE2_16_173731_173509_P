@@ -27,11 +27,25 @@ app.use('/js',express.static(__dirname+'/js'));
 //setup port
 app.set('port', (process.env.PORT || 5000));
 
-//mapping Apis
+/**
+ * @brief Intercetto tutte le richiets ROOT/db/init.
+ * @param [in|out] input--> richiama la funzione db.initTables.
+ * @return Description of returned value.
+ */
 app.use('/db/init', db.initTables);
 
+/**
+ * @brief Intercetto tutte le richiets ROOT/.
+ * @param [in|out] input--> richiama la funzione db.getMenuToShow.
+ * @return nella pagina benvenuto.ejs.
+ */
 app.get('/', db.getMenuToShow);
 
+/**
+ * @brief Intercetto tutte le richiets ROOT/setDayMenu.
+ * @param [in|out] input--> richiama la funzione db.setUserMenu.
+ * @return Description of returned value.
+ */
 app.post('/setDayMenu', db.setUserMenu);
 
 app.use('*', function (req, res) {

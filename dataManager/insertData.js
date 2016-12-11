@@ -2,6 +2,15 @@
 var random=require('./random.js');
 
 //funzione che inserisce i valori casuali alle tabelle
+/**
+ * @brief funzione che inserisce i valori casuali alle tabelle.
+ * @param [in|out] input--> user nome tabella.
+ * @param [in|out] input--> giorno nome tabella.
+ * @param [in|out] input--> pasto nome tabella.
+ * @param [in|out] input--> menu_giorno nome tabella.
+ * @param [in|out] input--> pasto_scelto nome tabella.
+ * @return Description of returned value.
+ */
 function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
     //crea un user
     user.create({
@@ -199,28 +208,7 @@ function insertData(user,giorno,pasto,menu_giorno,pasto_scelto) {
             });
         }
     }
-
-    //create Menu scelto dal user num 1
-    /*pasto_scelto.create({
-        user_id: 1,
-        pasto_id: 2,
-        giorno_id:1
-    });
-    pasto_scelto.create({
-        user_id: 1,
-        pasto_id: 7,
-        giorno_id:1
-    });
-    pasto_scelto.create({
-        user_id: 1,
-        pasto_id: 11,
-        giorno_id:1
-    });
-    pasto_scelto.create({
-        user_id: 1,
-        pasto_id: 17,
-        giorno_id:1
-    });*/
 }
 
+//esporta la funzione
 exports.insertData=insertData;

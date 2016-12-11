@@ -9,7 +9,13 @@ const connectionString = process.env.DATABASE_URL;
 //const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
-//dichiarazione tabella user
+/**
+ * @brief dichiarazione tabella user .
+ * @param [in|out] input--> nome tabella [string].
+ * @param [in|out] input--> first name[string].
+ * @param [in|out] input--> last name [string].
+ * @return.
+ */
 const user=Conn.define('user',{
         first_name: Sequelize.STRING,
         last_name: Sequelize.STRING
@@ -18,7 +24,11 @@ const user=Conn.define('user',{
         freezeTableName: true
 });
 
-//dichiarazione tabella giorno
+/**
+ * @brief dichiarazione tabella giorno .
+ * @param [in|out] input--> nome tabella [string].
+ * @return.
+ */
 const giorno=Conn.define('giorni',{
         nome_giorno: Sequelize.STRING
     },{
@@ -26,7 +36,14 @@ const giorno=Conn.define('giorni',{
         freezeTableName: true
 });
 
-//dichiarazione tabella pasto
+/**
+ * @brief dichiarazione tabella pasto .
+ * @param [in|out] input--> nome tabella [string].
+ * @param [in|out] input--> nome pasto [string].
+ * @param [in|out] input--> tipo pasto [string].
+ * @param [in|out] input--> dettagli pasto [string].
+ * @return.
+ */
 const pasto=Conn.define('pasti',{
         nome_pasto: Sequelize.STRING,
         tipo: Sequelize.STRING,
@@ -36,29 +53,49 @@ const pasto=Conn.define('pasti',{
         freezeTableName: true
 });
 
-//dichiarazione tabella pasto_scelto 
+/**
+ * @brief dichiarazione tabella pasto_scelto .
+ * @param [in|out] input--> nome tabella.
+ * @return.
+ */
 const pasto_scelto=Conn.define('pasto_scelti',{},{
         timestamps:false,
         freezeTableName: true
 });
 
-//dichiarazione foreignKey della tabella pasto_scelto
+/**
+ * @brief dichiarazione foreignKey della tabella pasto_scelto.
+ * @param [in|out] input--> chiave esterna della prima tabella.
+ * @param [in|out] input--> chiave esterna della seconda tabella.
+ * @return Description of returned value.
+ */
 pasto_scelto.belongsTo(user, {foreignKey: 'user_id', targetKey: 'id'});
 pasto_scelto.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
 pasto_scelto.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
-//dichiarazione tabella menu_giorno
+/**
+ * @brief dichiarazione tabella menu_giorno .
+ * @param [in|out] input--> nome tabella.
+ * @return.
+ */
 const menu_giorno=Conn.define('menu_giorni',{},{
         timestamps:false,
         freezeTableName: true
 });   
 
-//dichiarazione foreignKey della tabella menu_giorno
+/**
+ * @brief dichiarazione foreignKey della tabella menu_giorno.
+ * @param [in|out] input--> chiave esterna della prima tabella.
+ * @param [in|out] input--> chiave esterna della seconda tabella.
+ * @return Description of returned value.
+ */
 menu_giorno.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
 menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
-
-//questa funzione crea le tabelle
+/**
+     * @brief Funzione che crea le tabelle con dati casuali.
+     * @return Description of returned value.
+     */
 function initTables(req, res) {
     Conn.sync({force:true}).then(function() {
         insertData.insertData(user,giorno,pasto,menu_giorno,pasto_scelto); //inserisci dati dentro le tabelle
@@ -69,7 +106,13 @@ function initTables(req, res) {
     });
 }
 
-//Funzioni che ritorna la lista dei pasti scelti dal utente
+/**
+ * @brief Funzioni che ritorna la lista dei pasti scelti dal utente.
+ * @param [in|out] input--> richiesta.
+ * @param [in|out] input--> id dell'utente.
+ * @param [in|out] input--> callback restituisce i risultati.
+ * @return Description of returned value.
+ */
 function getPastiScelti(res, id, callBack) {
     pasto_scelto.findAll({where:{ user_id: id}, include: [{model: user, required: true},{model: pasto, required: true}]}).then(function (result) {
         callBack (result); 
@@ -78,7 +121,12 @@ function getPastiScelti(res, id, callBack) {
     });
 }
 
-//Funzioni che ritorna la lista del menu
+/**
+ * @brief Funzioni che ritorna la lista del menu.
+ * @param [in|out] input--> la richiesta.
+ * @param [in|out] input--> callback restituisce i risultati.
+ * @return Description of returned value.
+ */
 function getMenu(res, callBack) {
     menu_giorno.findAll({include:[{model: pasto, required: true}]}).then(function (result) {
        callBack (result); 
@@ -87,7 +135,13 @@ function getMenu(res, callBack) {
     });
 }
 
-//Funzioni che ritorna un user
+/**
+ * @brief Funzioni che ritorna un utente.
+ * @param [in|out] input--> la richiesta.
+ * @param [in|out] input--> id dell'utente.
+ * @param [in|out] input--> callback restituisce i risultati.
+ * @return Description of returned value.
+ */
 function getUserById(res, id, callBack) {
     user.findById(id).then(function (result) {
         callBack (result); 
@@ -96,6 +150,12 @@ function getUserById(res, id, callBack) {
     });
 }
 
+/**
+ * @brief Restituisce il menu per vedere sulla pagina.
+ * @param [in|out] input--> la richiesta.
+ * @param [in|out] input--> la risposta.
+ * @return la pagina di benvenuto.
+ */
 function getMenuToShow(req, res) {
     var user_id= 1;
     getMenu(res, function (result_menu_settimana) {
@@ -196,7 +256,13 @@ function getMenuToShow(req, res) {
         })
     });
 }
-
+/**
+ * @brief Imposto il menu all'utente. 
+ * @param [in|out] input--> la richiesta.
+ * @param [in|out] input--> la risposta.
+ * @param [in|out] output--> 200 se andato a buon fine | 500 internal server db | 404 se non ha scelto tutti i pasti.
+ * @return Description of returned value.
+ */
 function setUserMenu(req, res) {
     if(typeof req.body!='undefined' && req.body){ //verifico se body di post e' definito o no
         var primo=req.body.primo;
@@ -228,17 +294,18 @@ function setUserMenu(req, res) {
                     giorno_id: req.body.giornoid
                 });
             }).then(function () {
-                res.send('1'); //inserito pasti
+                res.send('200'); //inserito pasti
             }).catch(function (err){ //catch db errors
-                res.send('-2'); //internel db error
+                res.send('500'); //internel db error
             })
         }
     }
     else{
-        res.send('-1'); //post body è vuoto
+        res.send('404'); //post body è vuoto
     }
 }
 
+//esporta le funzioni
 exports.initTables = initTables;
 exports.getMenuToShow = getMenuToShow;
 exports.setUserMenu = setUserMenu;
