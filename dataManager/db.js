@@ -297,20 +297,20 @@ function setUserMenu(req, res) {
                 });
             }).then(function () {
                 res.statusCode = 200;
-                res.send('200'); //inserito pasti
+                res.send('1'); //inserito pasti
             }).catch(function (err){ //catch db errors
                 res.statusCode = 500;
-                res.send('500'); //internel db error
+                res.send('-2'); //internel db error
             })
         }
         else{
             res.statusCode = 404;
-            res.send('404'); //no parameters
+            res.send('-1'); //no parameters
         }
     }
     else{
         res.statusCode = 404;
-        res.send('404'); //post body è vuoto
+        res.send('-1'); //post body è vuoto
     }
 }
 
