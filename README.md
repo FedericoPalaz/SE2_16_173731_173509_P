@@ -9,5 +9,6 @@ Per far partire l'app in locale bisogna fare heroku local e non node index.js.
 Per il testing viene fatto in locale quindi necessità il corretto funzionamento del database e la parte di script per la creazione delle tabelle se c'è ne bisogno. Per fare il testing è stato usato jasmine-node e installato tutte le sue dipendenze.
 Api sono state descritte nel file swagger.yaml che si trova nella cartella API.
 #
+
 Si trova su heroku al seguente link:
 https://progettosw2.herokuapp.com/
