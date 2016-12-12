@@ -66,7 +66,7 @@ const pasto_scelto=Conn.define('pasto_scelti',{},{
  * @brief dichiarazione foreignKey della tabella pasto_scelto.
  * @param [in|out] input--> chiave esterna della prima tabella.
  * @param [in|out] input--> chiave esterna della seconda tabella.
- * @return Description of returned value.
+ * @return .
  */
 pasto_scelto.belongsTo(user, {foreignKey: 'user_id', targetKey: 'id'});
 pasto_scelto.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
@@ -93,7 +93,7 @@ menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
 /**
      * @brief Funzione che crea le tabelle con dati casuali.
-     * @return Description of returned value.
+     * @return .
      */
 function initTables(req, res) {
     Conn.sync({force:true}).then(function() {
@@ -110,7 +110,7 @@ function initTables(req, res) {
  * @param [in|out] input--> richiesta.
  * @param [in|out] input--> id dell'utente.
  * @param [in|out] input--> callback restituisce i risultati.
- * @return Description of returned value.
+ * @return .
  */
 function getPastiScelti(res, id, callBack) {
     pasto_scelto.findAll({where:{ user_id: id}, include: [{model: user, required: true},{model: pasto, required: true}]}).then(function (result) {
@@ -124,7 +124,7 @@ function getPastiScelti(res, id, callBack) {
  * @brief Funzioni che ritorna la lista del menu.
  * @param [in|out] input--> la richiesta.
  * @param [in|out] input--> callback restituisce i risultati.
- * @return Description of returned value.
+ * @return .
  */
 function getMenu(res, callBack) {
     menu_giorno.findAll({include:[{model: pasto, required: true}]}).then(function (result) {
@@ -139,7 +139,7 @@ function getMenu(res, callBack) {
  * @param [in|out] input--> la richiesta.
  * @param [in|out] input--> id dell'utente.
  * @param [in|out] input--> callback restituisce i risultati.
- * @return Description of returned value.
+ * @return .
  */
 function getUserById(res, id, callBack) {
     user.findById(id).then(function (result) {
@@ -252,8 +252,8 @@ function getMenuToShow(req, res) {
             getUserById(res, user_id, function (result_user) {
                 res.statusCode = 200;
                 res.render('benvenuto', {lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom, user: result_user});
-            })
-        })
+            });
+        });
     });
 }
 /**
@@ -261,7 +261,7 @@ function getMenuToShow(req, res) {
  * @param [in|out] input--> la richiesta.
  * @param [in|out] input--> la risposta.
  * @param [in|out] output--> 200 se andato a buon fine | 500 internal server db | 404 se non ha scelto tutti i pasti.
- * @return Description of returned value.
+ * @return .
  */
 function setUserMenu(req, res) {
     if(typeof req.body!= undefined && req.body){ //verifico se body di post e' definito o no
