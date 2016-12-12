@@ -8,4 +8,9 @@ describe("random", function () {
         random.init(min, max);
         expect(random.getLength()).toEqual(result);     
     });
+
+    it("should not init array numbers, min or max is not number",function() {
+        random.init('a',2);
+        expect(random.getLength()).toEqual('undefined'); 
+    });
 });

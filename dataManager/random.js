@@ -9,11 +9,13 @@ var numbers;
  * @return 
  */
 function init(min,max) {
-    numbers=[];
-    for(var i=min;i<max;i++){
-        numbers[i]=i;
+    if (typeof min == 'number' && typeof max == 'number'){
+        numbers=[];
+        for(var i=min;i<max;i++){
+            numbers[i]=i;
+        }
+        shuffle(numbers);
     }
-    shuffle(numbers);
 }
 
 // @return Funzione che ritorna il valore in cima alla pila 
