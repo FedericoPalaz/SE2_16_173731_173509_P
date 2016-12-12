@@ -264,34 +264,36 @@ function getMenuToShow(req, res) {
  * @return Description of returned value.
  */
 function setUserMenu(req, res) {
-    if(typeof req.body!='undefined' && req.body){ //verifico se body di post e' definito o no
+    if(typeof req.body!= undefined && req.body){ //verifico se body di post e' definito o no
+        var userid=req.body.userid;
+        var giornoid=req.body.giornoid;
         var primo=req.body.primo;
         var secondo=req.body.secondo;
         var contorno=req.body.contorno;
-        var dolce=req.body.contorno;
+        var dolce=req.body.dolce;
 
-        if(primo != 'undefined' || secondo != 'undefined' || contorno != 'undefined' || dolce != 'undefined'){ //se almeno utente ha scelto un pasto, allora salvo nel db
+        if((primo != undefined || secondo != undefined || contorno != undefined || dolce != undefined) && (giornoid != undefined && userid != undefined)){ //se almeno utente ha scelto un pasto, allora salvo nel db
             pasto_scelto.create({
-                user_id: req.body.userid,
-                pasto_id: req.body.primo,
-                giorno_id: req.body.giornoid
+                user_id: userid,
+                pasto_id: primo,
+                giorno_id: giornoid
             }).then(function () {
                 pasto_scelto.create({
-                    user_id: req.body.userid,
-                    pasto_id: req.body.secondo,
-                    giorno_id: req.body.giornoid
+                    user_id: userid,
+                    pasto_id: secondo,
+                    giorno_id: giornoid
                 });
             }).then(function () {
                 pasto_scelto.create({
-                    user_id: req.body.userid,
-                    pasto_id: req.body.contorno,
-                    giorno_id: req.body.giornoid
+                    user_id: userid,
+                    pasto_id: contorno,
+                    giorno_id: giornoid
                 });
             }).then(function () {
                 pasto_scelto.create({
-                    user_id: req.body.userid,
-                    pasto_id: req.body.dolce,
-                    giorno_id: req.body.giornoid
+                    user_id: userid,
+                    pasto_id: dolce,
+                    giorno_id: giornoid
                 });
             }).then(function () {
                 res.send('200'); //inserito pasti
