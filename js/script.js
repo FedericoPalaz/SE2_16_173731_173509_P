@@ -35,12 +35,13 @@ function apri(s)
  * @param [in|out] input-> id della form.
  * @return un popup in caso di errore.
  */
-function salvaPasti(form_id) {
+function salvaPasti(form_id, button) {
     if(verficaForm(form_id)){ //se l'utente ha inserito almeno un un pasto allora invia la richiesta di salvare al server api
         var form_id_S='#'+form_id;
         $.post( "/setDayMenu", $( form_id_S ).serialize(), function (data, status) {
             
             if(data=='1'){
+                button.disabled = true;
                 Materialize.toast('Successo: Salvato i tuoi pasti', 5000, 'green accent-3');
                 window.setTimeout(function () {
                     location.href = "/";
