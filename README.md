@@ -1,5 +1,5 @@
 # SE2_16_173731_173509_P
-## Progetto software2
+## SE2 Progetto
 Il progetto è stato creato per semplificare l'ordinazione e la valutazione dei pasti da parte degli anziani per un'Agenzia di Trento. Quello che si può trovare su git è solo una parte, cioè solo la parte di ordinazione perchè purtroppo per i tempi ristretti non si è potuto sviluppare tutta l'app.
 Se si vuole provarlo in locale bisogna avere creato un db vuoto e se si vuole connettersi bisogna usare la seguente stringa: DATABASE_URL= ('postgres://dbSW:password@localhost:5432/swDBFinal')
 Se si volesse cambiarla si trova nella cartella dataManager nel file db.js.
