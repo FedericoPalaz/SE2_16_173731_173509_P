@@ -5,8 +5,8 @@ var pg= require('pg');              //pg library
 var insertData=require('./insertData.js'); 
 
 //Connessione al db
-const connectionString = process.env.DATABASE_URL;
-//const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
+//const connectionString = process.env.DATABASE_URL;
+const connectionString ='postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
 /**
@@ -251,6 +251,7 @@ function getMenuToShow(req, res) {
 
             //user
             getUserById(res, user_id, function (result_user) {
+                res.statusCode = 200;
                 res.render('benvenuto', {lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom, user: result_user});
             })
         })
@@ -268,7 +269,7 @@ function setUserMenu(req, res) {
         var primo=req.body.primo;
         var secondo=req.body.secondo;
         var contorno=req.body.contorno;
-        var dolce=req.body.contorno;
+        var dolce=req.body.dolce;
 
         if(primo != 'undefined' || secondo != 'undefined' || contorno != 'undefined' || dolce != 'undefined'){ //se almeno utente ha scelto un pasto, allora salvo nel db
             pasto_scelto.create({
@@ -294,13 +295,20 @@ function setUserMenu(req, res) {
                     giorno_id: req.body.giornoid
                 });
             }).then(function () {
+                res.statusCode = 200;
                 res.send('200'); //inserito pasti
             }).catch(function (err){ //catch db errors
+                res.statusCode = 500;
                 res.send('500'); //internel db error
             })
         }
+        else{
+            res.statusCode = 404;
+            res.send('404'); //no parameters
+        }
     }
     else{
+        res.statusCode = 404;
         res.send('404'); //post body è vuoto
     }
 }

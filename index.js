@@ -49,6 +49,7 @@ app.get('/', db.getMenuToShow);
 app.post('/setDayMenu', db.setUserMenu);
 
 app.use('*', function (req, res) {
+  res.statusCode = 404;
   res.render('404');
 })
 

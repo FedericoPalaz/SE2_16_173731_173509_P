@@ -24,11 +24,17 @@ function getNum() {
 }
 
 
-// @return array number Length 
+// @return array number Length, used for testing 
 function getLength() {
     return numbers.length;
+}
+
+// @return array, used for testing
+function getNumbers() {
+    return numbers;
 }
 
 exports.init=init;
 exports.getNum=getNum;
 exports.getLength=getLength;
+exports.getNumbers=getNumbers;
