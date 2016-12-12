@@ -1,7 +1,7 @@
-//lib for sending requests
+//request lib
 var request = require("request");
 
-//set base URL
+//web app url
 var base_url = "http://localhost:5000/";
 
 describe("test /", function() {
