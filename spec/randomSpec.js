@@ -6,11 +6,11 @@ describe("random", function () {
     it("should init numbers", function (done) {
         done();
         random.init(min, max);
-        expect(random.getLength).toEqual(result);     
+        expect(random.getLength()).toEqual(result);     
     });
 
     it("should not init array numbers, min or max is not number",function() {
         random.init('a',2);
-        expect(random.get).toBeUndefined();
+        expect(random.getNumbers()).toBeUndefined();
     });
 });
