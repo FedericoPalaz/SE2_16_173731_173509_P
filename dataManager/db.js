@@ -86,7 +86,7 @@ const menu_giorno=Conn.define('menu_giorni',{},{
  * @brief dichiarazione foreignKey della tabella menu_giorno.
  * @param [in|out] input--> chiave esterna della prima tabella.
  * @param [in|out] input--> chiave esterna della seconda tabella.
- * @return Description of returned value.
+ * @return.
  */
 menu_giorno.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
 menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
