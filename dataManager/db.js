@@ -234,8 +234,8 @@ function getMenuToShow(req, res) {
             getUserById(res, user_id, function (result_user) {
                 res.statusCode = 200;
                 res.render('benvenuto', {lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom, user: result_user});
-            })
-        })
+            });
+        });
     });
 }
 /**
