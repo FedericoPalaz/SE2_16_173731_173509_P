@@ -28,26 +28,23 @@ app.use('/js',express.static(__dirname+'/js'));
 app.set('port', (process.env.PORT || 5000));
 
 /**
- * @brief Intercetto tutte le richiets ROOT/db/init.
- * @param [in|out] input--> richiama la funzione db.initTables.
- * @return Description of returned value.
+ * @brief Intercetto tutte le richiets ROOT/db/init. Inizializza db crando le tabelle e inserendo i dati
  */
 app.use('/db/init', db.initTables);
 
 /**
  * @brief Intercetto tutte le richiets ROOT/.
- * @param [in|out] input--> richiama la funzione db.getMenuToShow.
- * @return nella pagina benvenuto.ejs.
  */
 app.get('/', db.getMenuToShow);
 
 /**
  * @brief Intercetto tutte le richiets ROOT/setDayMenu.
- * @param [in|out] input--> richiama la funzione db.setUserMenu.
- * @return Description of returned value.
  */
 app.post('/setDayMenu', db.setUserMenu);
 
+/**
+ * @brief se user fa richiesta su api non impostato dal server, allora manda nella pagina not found
+ */
 app.use('*', function (req, res) {
   res.statusCode = 404;
   res.render('404');

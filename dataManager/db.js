@@ -1,19 +1,15 @@
-var Sequelize= require('sequelize'); //sequelize library
-var pg= require('pg');              //pg library
+var Sequelize= require('sequelize'); //libreria sequelize, usato per ORM (object oriented maping) con DB
+var pg= require('pg');              //libreria pg, libreria per usato per connettere e interrogare DB 
 
-//import insertData.js
+//import insertData.js, questo moduli inserisce dato predefiniti nel DB
 var insertData=require('./insertData.js'); 
 
-//Connessione al db
+//Stringa di connessione del DB e configurazione per sequelize
 const connectionString = process.env.DATABASE_URL || 'postgres://dbSW:password@localhost:5432/swDBFinal';
 var Conn = new Sequelize(connectionString);
 
 /**
- * @brief dichiarazione tabella user .
- * @param [in|out] input--> nome tabella [string].
- * @param [in|out] input--> first name[string].
- * @param [in|out] input--> last name [string].
- * @return.
+ * @brief dichiarazione tabella user con sequelize
  */
 const user=Conn.define('user',{
         first_name: Sequelize.STRING,
@@ -25,8 +21,6 @@ const user=Conn.define('user',{
 
 /**
  * @brief dichiarazione tabella giorno .
- * @param [in|out] input--> nome tabella [string].
- * @return.
  */
 const giorno=Conn.define('giorni',{
         nome_giorno: Sequelize.STRING
@@ -37,11 +31,6 @@ const giorno=Conn.define('giorni',{
 
 /**
  * @brief dichiarazione tabella pasto .
- * @param [in|out] input--> nome tabella [string].
- * @param [in|out] input--> nome pasto [string].
- * @param [in|out] input--> tipo pasto [string].
- * @param [in|out] input--> dettagli pasto [string].
- * @return.
  */
 const pasto=Conn.define('pasti',{
         nome_pasto: Sequelize.STRING,
@@ -54,47 +43,35 @@ const pasto=Conn.define('pasti',{
 
 /**
  * @brief dichiarazione tabella pasto_scelto .
- * @param [in|out] input--> nome tabella.
- * @return.
  */
 const pasto_scelto=Conn.define('pasto_scelti',{},{
         timestamps:false,
         freezeTableName: true
 });
 
-/**
- * @brief dichiarazione foreignKey della tabella pasto_scelto.
- * @param [in|out] input--> chiave esterna della prima tabella.
- * @param [in|out] input--> chiave esterna della seconda tabella.
- * @return Description of returned value.
- */
+// dichiarazione delle relazioni tra le tabelle (user, pasto, giorno) nel DB tramite Sequelize
 pasto_scelto.belongsTo(user, {foreignKey: 'user_id', targetKey: 'id'});
 pasto_scelto.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
 pasto_scelto.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
 /**
- * @brief dichiarazione tabella menu_giorno .
- * @param [in|out] input--> nome tabella.
- * @return.
+ * @brief dichiarazione tabella menu_giorno
  */
 const menu_giorno=Conn.define('menu_giorni',{},{
         timestamps:false,
         freezeTableName: true
 });   
 
-/**
- * @brief dichiarazione foreignKey della tabella menu_giorno.
- * @param [in|out] input--> chiave esterna della prima tabella.
- * @param [in|out] input--> chiave esterna della seconda tabella.
- * @return Description of returned value.
- */
+// dichiarazione delle relazioni tra le tabelle (pasto, giorno) nel DB tramite Sequelize
 menu_giorno.belongsTo(pasto, {foreignKey: 'pasto_id', targetKey: 'id'});
 menu_giorno.belongsTo(giorno, {foreignKey: 'giorno_id', targetKey: 'id'});
 
 /**
      * @brief Funzione che crea le tabelle con dati casuali.
-     * @return Description of returned value.
-     */
+     * @param [in] req--> richiesta http.
+     * @param [in] res--> response http.
+     * 
+*/
 function initTables(req, res) {
     Conn.sync({force:true}).then(function() {
         insertData.insertData(user,giorno,pasto,menu_giorno,pasto_scelto); //inserisci dati dentro le tabelle
@@ -107,10 +84,9 @@ function initTables(req, res) {
 
 /**
  * @brief Funzioni che ritorna la lista dei pasti scelti dal utente.
- * @param [in|out] input--> richiesta.
- * @param [in|out] input--> id dell'utente.
- * @param [in|out] input--> callback restituisce i risultati.
- * @return Description of returned value.
+     * @param [in] res--> response http.
+     * @param [in] id--> id di un user.
+     * @param [in] callback --> un callBack che ritorna i risultati
  */
 function getPastiScelti(res, id, callBack) {
     pasto_scelto.findAll({where:{ user_id: id}, include: [{model: user, required: true},{model: pasto, required: true}]}).then(function (result) {
@@ -122,42 +98,46 @@ function getPastiScelti(res, id, callBack) {
 
 /**
  * @brief Funzioni che ritorna la lista del menu.
- * @param [in|out] input--> la richiesta.
- * @param [in|out] input--> callback restituisce i risultati.
- * @return Description of returned value.
+ * @param [in] res--> response http.
+ * @param [in] callback --> un callBack che ritorna i risultati
  */
 function getMenu(res, callBack) {
+    //query: cerca menu dei giorni e join con pasto
     menu_giorno.findAll({include:[{model: pasto, required: true}]}).then(function (result) {
        callBack (result); 
     }).catch(function (err) {
+        //se c'e' errore durante query porta nel error page 500
         res.render('500');
     });
 }
 
 /**
  * @brief Funzioni che ritorna un utente.
- * @param [in|out] input--> la richiesta.
- * @param [in|out] input--> id dell'utente.
- * @param [in|out] input--> callback restituisce i risultati.
- * @return Description of returned value.
+ * @param [in] res--> response http.
+ * @param [in] id--> id di un user.
+ * @param [in] callback --> un callBack che ritorna i risultati
  */
 function getUserById(res, id, callBack) {
+    //query: tova un user con un specifico id
     user.findById(id).then(function (result) {
         callBack (result); 
     }).catch(function (err) {
+        //se c'e' errore durante query porta nel error page 500
         res.render('500');
     });
 }
 
 /**
  * @brief Restituisce il menu per vedere sulla pagina.
- * @param [in|out] input--> la richiesta.
- * @param [in|out] input--> la risposta.
+ * @param [in] req--> richiesta http.
+ * @param [in] res--> response http.
  * @return la pagina di benvenuto.
  */
 function getMenuToShow(req, res) {
-    var user_id= 1;
+    var user_id= 1; //pre Imposto user id, vogliamo visualizzare il suo menu, visto che abbiamo solo un user abbiamo impostato a mano, se no sarebbe impostato nel http request
+    //prendo dal db il menu preimpostato dall'azienda tramite result_menu_settimana
     getMenu(res, function (result_menu_settimana) {
+        //creo oggetti giorni dove voglio salvare i dati ricevuti dal DB, imposto pasto scelto = falso
         var lun={
           scelto: false,
           pasti: []
@@ -186,6 +166,7 @@ function getMenuToShow(req, res) {
           scelto: false,
           pasti: []
         };
+        //dal db prendo pasti gia' scelti dal utente tramite la funzione result_pasto_scelto, se ha scelto imposto var scelto = true
         getPastiScelti(res, user_id, function (result_pasto_scelto) {
             for(var i = 0; i< result_pasto_scelto.length; i++){
                 if(parseInt(result_pasto_scelto[i].giorno_id)==1){
@@ -217,6 +198,7 @@ function getMenuToShow(req, res) {
                   dom.pasti.push(result_pasto_scelto[i].pasti);
                 }
             }
+            //adesso metto menu preimpostato dall'azienda nei giorni in qui il chiente non ha ancora scelto il suo menu
             for(var i = 0; i< result_menu_settimana.length; i++){
                   if(parseInt(result_menu_settimana[i].giorno_id)==1){
                     if(lun.scelto==false)
@@ -248,7 +230,7 @@ function getMenuToShow(req, res) {
                   }
             }
 
-            //user
+            //prendo le informazioni del cliente e invio alla pagini tutte le info raccolte dal db alla pagina benvenuti
             getUserById(res, user_id, function (result_user) {
                 res.statusCode = 200;
                 res.render('benvenuto', {lun:lun, mar:mar, mer:mer, gio:gio, ven:ven, sab:sab, dom:dom, user: result_user});
@@ -258,21 +240,21 @@ function getMenuToShow(req, res) {
 }
 /**
  * @brief Imposto il menu all'utente. 
- * @param [in|out] input--> la richiesta.
- * @param [in|out] input--> la risposta.
- * @param [in|out] output--> 200 se andato a buon fine | 500 internal server db | 404 se non ha scelto tutti i pasti.
+ * @param [in] req--> richiesta http.
+ * @param [in] res--> response http.
+ * @param [out] output--> 200 se andato a buon fine | 500 internal server db | 404 se non ha scelto tutti i pasti.
  * @return Description of returned value.
  */
 function setUserMenu(req, res) {
-    if(typeof req.body!= undefined && req.body){ //verifico se body di post e' definito o no
+    if(typeof req.body!= undefined && req.body){ //verifico se il body del post request e' definito o no
         var userid=req.body.userid;
         var giornoid=req.body.giornoid;
         var primo=req.body.primo;
         var secondo=req.body.secondo;
         var contorno=req.body.contorno;
         var dolce=req.body.dolce;
-
         if((primo != undefined || secondo != undefined || contorno != undefined || dolce != undefined) && (giornoid != undefined && userid != undefined)){ //se almeno utente ha scelto un pasto, allora salvo nel db
+            //se il cliente almeno ha inserito un pasto e ci sono user id e del giorno id del pasto scelto
             pasto_scelto.create({
                 user_id: userid,
                 pasto_id: primo,
@@ -296,19 +278,23 @@ function setUserMenu(req, res) {
                     giorno_id: giornoid
                 });
             }).then(function () {
+                //se tutto andato bene
                 res.statusCode = 200;
                 res.send('1'); //inserito pasti
-            }).catch(function (err){ //catch db errors
+            }).catch(function (err){ 
+                //catch db errors
                 res.statusCode = 500;
                 res.send('-2'); //internel db error
             })
         }
         else{
+            //errore mancano i parameters richiesti
             res.statusCode = 404;
             res.send('-1'); //no parameters
         }
     }
     else{
+        //errore body del post e' vuoto
         res.statusCode = 404;
         res.send('-1'); //post body è vuoto
     }

@@ -1,5 +1,4 @@
-# this is an example of the Uber API
-# as a demonstration of an API spec in YAML
+# this is our API Documentation
 swagger: '2.0'
 info:
   title: ASPS
