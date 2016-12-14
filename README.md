@@ -1,13 +1,13 @@
 # SE2_16_173731_173509_P
 ## SE2 Progetto
-#
-#
+
+
 Autori
 --------------
 --------
 ##### Federico Palazzini
 ##### Zihadul Azam
-#
+
 Scopo e Descrizione
 ----------
 ---
@@ -63,10 +63,7 @@ Copyright © 2016, Realizzato Da [Federico Palazzini](https://github.com/Federic
 
 ***
 
-v0.0.1, on Dec 14, 2016._
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.
-
+v0.0.1, on Dec 14, 2016.
 
    [node.js]: <http://nodejs.org>
    [Materialize]: <http://materializecss.com/>
