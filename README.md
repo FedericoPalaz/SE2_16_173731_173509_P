@@ -1,21 +1,18 @@
 # SE2_16_173731_173509_P
-## SE2 Progetto
-#
-#
+## SE2 progetto
+
+
 Autori
 --------------
---------
 ##### Federico Palazzini
 ##### Zihadul Azam
-#
+
 Scopo e Descrizione
 ----------
----
 Il progetto è stato creato per semplificare l'ordinazione e la valutazione dei pasti da parte degli anziani per un'Agenzia di Trento. Quello che si può trovare su git è solo una parte, cioè solo la parte di ordinazione perchè purtroppo per i tempi ristretti non si è potuto sviluppare tutta l'app.
-#
+
 Tecnologie e Librerie Usate
 ------
----
 * [node.js] - è un framework che permette di per usare V8, l'interprete JavaScript di `Google` anche per realizzare web application e applicazioni fortemente orientate al networking
 * [Materialize] - è un responsive framework per front-end basto su Material Design
 * [Github] -  è una piattaforma per lo sviluppo collaborativo di software
@@ -26,10 +23,9 @@ Tecnologie e Librerie Usate
 * [pg]: libreria per utilizzare PostgresDB.
 * [EJS]: (Embedded JavaScrip) è un linguaggio di `templating` da parte del cliente.
 * [Shuffle-Array]: è una libreria per mescolare un `array`.
-#
+
 Come Eseguire
 --------
----
 Se si vuole provarlo in locale bisogna installare `node.js`, `npm`, `postgresDB`. Una volta installato bisogna creare un db vuoto e per connettersi bisogna usare la seguente stringa di connessione:
 ```sh
 DATABASE_URL= ('postgres://<username>:<password>@localhost:<porta>/<nome_db>')
@@ -43,16 +39,14 @@ $ npm install -d
 $ heroku local
 ```
 
-#
+
 Testing
 -----
----
 Per il testing viene fatto in locale quindi necessità il corretto funzionamento del database e la parte di script per la creazione delle tabelle se c'è ne bisogno. Per fare il testing è stato usato jasmine-node e installato tutte le sue dipendenze.
 Api sono state descritte nel file swagger.yaml che si trova nella cartella API.
-#
+
 Link
 -----
----
 Si trova su heroku al seguente link:
 https://progettosw2.herokuapp.com/
 [![N|Solid](http://darkorbithach.weebly.com/uploads/2/2/0/9/22097034/2592297_orig.png)](https://progettosw2.herokuapp.com/)
@@ -63,10 +57,7 @@ Copyright © 2016, Realizzato Da [Federico Palazzini](https://github.com/Federic
 
 ***
 
-v0.0.1, on Dec 14, 2016._
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.
-
+v0.0.1, on Dec 14, 2016.
 
    [node.js]: <http://nodejs.org>
    [Materialize]: <http://materializecss.com/>
