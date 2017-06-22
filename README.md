@@ -54,7 +54,7 @@ https://progettosw2.herokuapp.com/
 
 ## Licenza
 
-Copyright © 2016, Realizzato Da [Federico Palazzini](https://github.com/FedericoPalaz) e [Zihadul Azam] (https://github.com/zihadulazam)
+Copyright © 2016, Realizzato Da [Federico Palazzini](https://github.com/FedericoPalaz) e [Zihadul Azam](https://github.com/zihadulazam)
 
 ***
 
